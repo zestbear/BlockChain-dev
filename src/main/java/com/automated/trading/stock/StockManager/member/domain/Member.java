@@ -32,4 +32,7 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private Order order;
 
+    @OneToMany(mappedBy = "member")
+    private Post post;
+
 }
