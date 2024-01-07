@@ -1,5 +1,9 @@
 package com.automated.trading.stock.StockManager.member.domain;
 
+import com.automated.trading.stock.StockManager.asset.Asset;
+import com.automated.trading.stock.StockManager.member.domain.enumerate.MemberTradeType;
+import com.automated.trading.stock.StockManager.member.domain.enumerate.MemberType;
+import com.automated.trading.stock.StockManager.post.Post;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,16 +20,16 @@ public class Member {
 
     @Column
     @Enumerated(EnumType.STRING)
-    private String memberType;
+    private MemberType memberType;
 
     @Column
     @Enumerated(EnumType.STRING)
-    private String memberTradeType;
+    private MemberTradeType memberTradeType;
 
-    @OneToMany(mappedBy = "asset_id")
+    @OneToMany(mappedBy = "member")
     private Asset asset;
 
-    @OneToMany(mappedBy = "order_id")
+    @OneToMany(mappedBy = "member")
     private Order order;
 
 }
