@@ -3,10 +3,13 @@ package com.automated.trading.stock.StockManager.member.domain;
 import com.automated.trading.stock.StockManager.asset.domain.Asset;
 import com.automated.trading.stock.StockManager.member.domain.enumerate.MemberTradeType;
 import com.automated.trading.stock.StockManager.member.domain.enumerate.MemberType;
+import com.automated.trading.stock.StockManager.order.Order;
 import com.automated.trading.stock.StockManager.post.Post;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
 
 @Entity
 @Getter
@@ -27,12 +30,12 @@ public class Member {
     private MemberTradeType memberTradeType;
 
     @OneToMany(mappedBy = "member")
-    private Asset asset;
+    private ArrayList<Asset> assets;
 
     @OneToMany(mappedBy = "member")
-    private Order order;
+    private ArrayList<Order> orders;
 
     @OneToMany(mappedBy = "member")
-    private Post post;
+    private ArrayList<Post> posts;
 
 }
