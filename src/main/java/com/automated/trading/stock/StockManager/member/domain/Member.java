@@ -1,6 +1,6 @@
 package com.automated.trading.stock.StockManager.member.domain;
 
-import com.automated.trading.stock.StockManager.asset.Asset;
+import com.automated.trading.stock.StockManager.asset.domain.Asset;
 import com.automated.trading.stock.StockManager.member.domain.enumerate.MemberTradeType;
 import com.automated.trading.stock.StockManager.member.domain.enumerate.MemberType;
 import com.automated.trading.stock.StockManager.post.Post;
