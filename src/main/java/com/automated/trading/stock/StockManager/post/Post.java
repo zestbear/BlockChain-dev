@@ -1,6 +1,7 @@
 package com.automated.trading.stock.StockManager.post;
 
 import com.automated.trading.stock.StockManager.member.domain.Member;
+import com.automated.trading.stock.StockManager.post.enumerate.PostAttachmentType;
 import com.automated.trading.stock.StockManager.post.enumerate.PostType;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -27,6 +28,10 @@ public class Post {
 
     @Column(length = 2000)
     private String content;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private PostAttachmentType postAttachmentType;
 
     @Column
     private LocalDateTime dateTime;
