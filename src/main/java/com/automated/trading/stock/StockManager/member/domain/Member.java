@@ -1,6 +1,6 @@
 package com.automated.trading.stock.StockManager.member.domain;
 
-import com.automated.trading.stock.StockManager.asset.domain.Asset;
+import com.automated.trading.stock.StockManager.wallet.domain.Wallet;
 import com.automated.trading.stock.StockManager.member.domain.enumerate.MemberTradeType;
 import com.automated.trading.stock.StockManager.member.domain.enumerate.MemberType;
 import com.automated.trading.stock.StockManager.order.Order;
@@ -30,7 +30,7 @@ public class Member {
     private MemberTradeType memberTradeType;
 
     @OneToMany(mappedBy = "member") // 사용자가 보유 중인 종목들 + 정보 (평단, 개수 etc.)
-    private ArrayList<Asset> assets;
+    private ArrayList<Wallet> wallets;
 
     @OneToMany(mappedBy = "member") // 사용자가 전송한 주문 목록 -> 이후 batch로 하루마다 일괄적으로 orderLog로 전송
     private ArrayList<Order> orders;
