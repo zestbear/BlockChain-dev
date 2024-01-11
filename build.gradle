@@ -38,6 +38,9 @@ dependencies {
 //	testImplementation 'org.springframework.batch:spring-batch-test'
 //	testImplementation 'org.springframework.kafka:spring-kafka-test'
 //	testImplementation 'org.springframework.security:spring-security-test'
+	implementation 'org.bouncycastle:bcprov-jdk18on:1.75'
+	implementation 'org.bouncycastle:bcpkix-jdk18on:1.75'
+
 }
 
 tasks.named('test') {
