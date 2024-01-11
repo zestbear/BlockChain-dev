@@ -13,6 +13,10 @@ import java.security.spec.ECGenParameterSpec;
 @Getter
 public class WalletService {
 
+    static {
+        Security.addProvider(new BouncyCastleProvider());
+    }
+
     private PrivateKey key;
 
     private String privateKey;
