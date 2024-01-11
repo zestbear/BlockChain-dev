@@ -13,8 +13,8 @@ public class MemberService {
         this.memberRepository = memberRepository;
     }
 
-    @Transactional
-    public Long joinGeneral() {
-        // TODO: Dto 작성 필요
-    }
+//    @Transactional
+//    public Long joinGeneral() {
+//        // TODO: Dto 작성 필요
+//    }
 }
