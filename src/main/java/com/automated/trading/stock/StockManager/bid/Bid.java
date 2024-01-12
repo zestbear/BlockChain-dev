@@ -1,4 +1,4 @@
-package com.automated.trading.stock.StockManager.order;
+package com.automated.trading.stock.StockManager.bid;
 
 import com.automated.trading.stock.StockManager.member.domain.Member;
 import jakarta.persistence.*;
@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Order {
+public class Bid {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id")
+    @Column(name = "bid_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
