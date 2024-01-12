@@ -3,7 +3,7 @@ package com.automated.trading.stock.StockManager.member.domain;
 import com.automated.trading.stock.StockManager.wallet.domain.Wallet;
 import com.automated.trading.stock.StockManager.member.domain.enumerate.MemberTradeType;
 import com.automated.trading.stock.StockManager.member.domain.enumerate.MemberType;
-import com.automated.trading.stock.StockManager.order.Order;
+import com.automated.trading.stock.StockManager.bid.Bid;
 import com.automated.trading.stock.StockManager.post.Post;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -29,11 +29,12 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private MemberTradeType memberTradeType;
 
-    @OneToMany(mappedBy = "member") // 사용자가 보유 중인 종목들 + 정보 (평단, 개수 etc.)
-    private ArrayList<Wallet> wallets;
+    @OneToOne // 사용자가 보유 중인 종목들 + 정보 (평단, 개수 etc.)
+    @JoinColumn(name = "wallet_id")
+    private Wallet wallet;
 
     @OneToMany(mappedBy = "member") // 사용자가 전송한 주문 목록 -> 이후 batch로 하루마다 일괄적으로 orderLog로 전송
-    private ArrayList<Order> orders;
+    private ArrayList<Bid> bids;
 
     @OneToMany(mappedBy = "member") // 사용자가 작성한 게시글
     private ArrayList<Post> posts;
