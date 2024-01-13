@@ -1,20 +1,12 @@
 package com.automated.trading.stock.StockManager.member.service;
 
-import com.automated.trading.stock.StockManager.member.domain.MemberRepository;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import com.automated.trading.stock.StockManager.member.controller.dto.JoinRequestDto;
+import com.automated.trading.stock.StockManager.member.controller.dto.LoginRequestDto;
 
-@Service
-public class MemberService {
+public interface MemberService {
 
-    private MemberRepository memberRepository;
+    public Boolean join(JoinRequestDto joinRequestDto);
+    public Boolean login(LoginRequestDto loginRequestDto);
+    public void leave(Long memberId);
 
-    public MemberService(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
-    }
-
-//    @Transactional
-//    public Long joinGeneral() {
-//        // TODO: Dto 작성 필요
-//    }
 }
