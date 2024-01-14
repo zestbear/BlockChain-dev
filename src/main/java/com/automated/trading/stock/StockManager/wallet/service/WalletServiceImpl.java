@@ -1,0 +1,81 @@
+package com.automated.trading.stock.StockManager.wallet.service;
+
+import com.automated.trading.stock.StockManager.wallet.domain.KeyPairRepository;
+import com.automated.trading.stock.StockManager.wallet.domain.WalletRepository;
+import com.automated.trading.stock.StockManager.wallet.dto.SearchKeyPairDto;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.security.*;
+import java.security.spec.ECGenParameterSpec;
+
+@Service
+@Transactional
+public class WalletServiceImpl implements WalletService {
+
+    static {
+        Security.addProvider(new BouncyCastleProvider());
+    }
+
+    private final WalletRepository walletRepository;
+    private final KeyPairRepository keyPairRepository;
+
+    public WalletServiceImpl(WalletRepository walletRepository, KeyPairRepository keyPairRepository) {
+        this.walletRepository = walletRepository;
+        this.keyPairRepository = keyPairRepository;
+    }
+
+    /*
+        KeyPair (개인키, 공개키) 생성
+     */
+    @Transactional
+    public String[] createKeypair() {
+
+        try {
+            KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("ECDSA", "BC");
+            SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
+            ECGenParameterSpec ecGenParameterSpec = new ECGenParameterSpec("prime192v1");
+
+            keyPairGenerator.initialize(ecGenParameterSpec, secureRandom);
+
+            KeyPair keyPair = keyPairGenerator.generateKeyPair();
+            String[] pairs = getStrings(keyPair);
+            com.automated.trading.stock.StockManager.wallet.domain.KeyPair newPair = new com.automated.trading.stock.StockManager.wallet.domain.KeyPair(pairs[0], pairs[1], pairs[2]);
+            keyPairRepository.save(newPair);
+
+            return getStrings(keyPair);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    private static String[] getStrings(KeyPair keyPair) {
+        PrivateKey key = keyPair.getPrivate();
+
+        String parsing = key.toString();
+        parsing = parsing.replace("EC Private Key", "");
+        parsing = parsing.replaceAll(" ", "");
+        parsing = parsing.replaceAll("X:", "");
+        parsing = parsing.replaceAll("Y:", "");
+        parsing = parsing.replaceAll(":", "");
+        parsing = parsing.replaceAll("\\[", "");
+        parsing = parsing.replaceAll("]", "");
+
+        String[] parsed = new String[3];
+        parsed = parsing.split("\n");
+        return parsed;
+    }
+
+
+    /*
+        Transaction (거래) 이 일어날 때 사용
+        Cryptographic signature (서명) 을 할 때 사용자가 입력한 개인키가 맞는지 확인
+     */
+    @Override
+    public Boolean checkKey(SearchKeyPairDto searchKeyPairDto) {
+        return false;
+    }
+
+}
