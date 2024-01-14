@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.security.*;
 import java.security.spec.ECGenParameterSpec;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -80,7 +81,16 @@ public class WalletServiceImpl implements WalletService {
         Cryptographic signature (서명) 을 할 때 사용자가 입력한 개인키가 맞는지 확인
      */
     @Override
-    public Boolean checkKey(SearchKeyPairDto searchKeyPairDto) {
+    public Boolean checkKey(SearchKeyPairDto searchKeyPairDto, String privateKey) throws Exception {    // privateKey : 사용자 입력 Key
+        String pubKeyX = encryption.decrypt(searchKeyPairDto.getPublicKeyX());
+        String pubKeyY = encryption.decrypt(searchKeyPairDto.getPublicKeyY());
+        String priKey;
+
+        Optional<com.automated.trading.stock.StockManager.wallet.domain.KeyPair> byPublicKey = keyPairRepository.findByPublicKey(pubKeyX, pubKeyY);
+        if (byPublicKey.isPresent()) {
+            priKey = encryption.decrypt(byPublicKey.get().getPrivateKey());
+            return priKey.equals(privateKey);
+        }
         return false;
     }
 
