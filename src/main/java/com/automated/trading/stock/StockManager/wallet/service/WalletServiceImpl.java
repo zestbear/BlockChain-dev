@@ -1,5 +1,6 @@
 package com.automated.trading.stock.StockManager.wallet.service;
 
+import com.automated.trading.stock.StockManager.util.config.Encryption;
 import com.automated.trading.stock.StockManager.wallet.domain.KeyPairRepository;
 import com.automated.trading.stock.StockManager.wallet.domain.WalletRepository;
 import com.automated.trading.stock.StockManager.wallet.dto.SearchKeyPairDto;
@@ -18,10 +19,12 @@ public class WalletServiceImpl implements WalletService {
         Security.addProvider(new BouncyCastleProvider());
     }
 
+    private final Encryption encryption;
     private final WalletRepository walletRepository;
     private final KeyPairRepository keyPairRepository;
 
-    public WalletServiceImpl(WalletRepository walletRepository, KeyPairRepository keyPairRepository) {
+    public WalletServiceImpl(Encryption encryption, WalletRepository walletRepository, KeyPairRepository keyPairRepository) {
+        this.encryption = encryption;
         this.walletRepository = walletRepository;
         this.keyPairRepository = keyPairRepository;
     }
@@ -41,7 +44,10 @@ public class WalletServiceImpl implements WalletService {
 
             KeyPair keyPair = keyPairGenerator.generateKeyPair();
             String[] pairs = getStrings(keyPair);
-            com.automated.trading.stock.StockManager.wallet.domain.KeyPair newPair = new com.automated.trading.stock.StockManager.wallet.domain.KeyPair(pairs[0], pairs[1], pairs[2]);
+            String priKey = encryption.encrypt(pairs[0]);
+            String pubKeyX = encryption.encrypt(pairs[1]);
+            String pubKeyY = encryption.encrypt(pairs[2]);
+            com.automated.trading.stock.StockManager.wallet.domain.KeyPair newPair = new com.automated.trading.stock.StockManager.wallet.domain.KeyPair(priKey, pubKeyX, pubKeyY);
             keyPairRepository.save(newPair);
 
             return getStrings(keyPair);
