@@ -3,7 +3,6 @@ package com.automated.trading.stock.StockManager.member.domain;
 import com.automated.trading.stock.StockManager.wallet.domain.Wallet;
 import com.automated.trading.stock.StockManager.member.domain.enumerate.MemberTradeType;
 import com.automated.trading.stock.StockManager.member.domain.enumerate.MemberType;
-import com.automated.trading.stock.StockManager.bid.Bid;
 import com.automated.trading.stock.StockManager.post.Post;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -48,8 +47,8 @@ public class Member {
     @JoinColumn(name = "wallet_id")
     private Wallet wallet;
 
-    @OneToMany(mappedBy = "member") // 사용자가 전송한 주문 목록 -> 이후 batch로 하루마다 일괄적으로 orderLog로 전송
-    private ArrayList<Bid> bids;
+//    @OneToMany(mappedBy = "member") // 사용자가 전송한 주문 목록 -> 이후 batch로 하루마다 일괄적으로 orderLog로 전송
+//    private ArrayList<Bid> bids;
 
     @OneToMany(mappedBy = "member") // 사용자가 작성한 게시글
     private ArrayList<Post> posts;
@@ -63,9 +62,9 @@ public class Member {
         this.memberTradeType = MemberTradeType.BTC;
     }
 
-    public void addBids(Bid bid) {
-        bids.add(bid);
-    }
+//    public void addBids(Bid bid) {
+//        bids.add(bid);
+//    }
 
     public void addPosts(Post post) {
         posts.add(post);
