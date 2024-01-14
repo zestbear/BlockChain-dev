@@ -15,13 +15,13 @@ public class KeyPair {
     @Column(name = "keypair_id")
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String publicKeyX;
 
-    @Column
+    @Column(nullable = false)
     private String publicKeyY;
 
-    @Column
+    @Column(nullable = false)
     private String privateKey;
 
     @Builder
