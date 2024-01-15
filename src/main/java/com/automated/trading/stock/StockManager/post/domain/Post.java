@@ -1,8 +1,8 @@
-package com.automated.trading.stock.StockManager.post;
+package com.automated.trading.stock.StockManager.post.domain;
 
 import com.automated.trading.stock.StockManager.member.domain.Member;
-import com.automated.trading.stock.StockManager.post.enumerate.PostAttachmentType;
-import com.automated.trading.stock.StockManager.post.enumerate.PostType;
+import com.automated.trading.stock.StockManager.post.domain.enumerate.PostAttachmentType;
+import com.automated.trading.stock.StockManager.post.domain.enumerate.PostType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -3,7 +3,7 @@ package com.automated.trading.stock.StockManager.member.domain;
 import com.automated.trading.stock.StockManager.wallet.domain.Wallet;
 import com.automated.trading.stock.StockManager.member.domain.enumerate.MemberTradeType;
 import com.automated.trading.stock.StockManager.member.domain.enumerate.MemberType;
-import com.automated.trading.stock.StockManager.post.Post;
+import com.automated.trading.stock.StockManager.post.domain.Post;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
