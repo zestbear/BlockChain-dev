@@ -26,5 +26,11 @@ public class Block {
     @Column
     private String timeStamp;
 
+    @Builder
+    public Block(String hash, String previousHash, String data, String timeStamp) {
+        this.hash = hash;
+        this.previousHash = previousHash;
+        this.timeStamp = timeStamp;
+    }
 
 }
