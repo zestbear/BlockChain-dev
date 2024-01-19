@@ -36,4 +36,4 @@ jobs:
         run: |
           echo "DB_PostgreSQL_URL=${{ secrets.postgresql-url }}"
           echo "DB_PostgreSQL_NAME=${{ secrets.postgresql-name }}"
-#          echo "DB_PostgreSQL_PASSWORD=${{ secrets.postgresql-password }}"
+          echo "DB_PostgreSQL_PASSWORD=${{ secrets.postgresql-password }}"
