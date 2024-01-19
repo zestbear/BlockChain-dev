@@ -2,7 +2,6 @@ package com.automated.trading.stock.StockManager.util.config;
 
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
@@ -12,7 +11,7 @@ import java.util.Base64;
 
 @Service
 @NoArgsConstructor
-public class Encryption {
+public class CryptionSecurity {
 
     private static final String ALGORITHM = "AES";
     private String KEY = ""; // TODO: 환경변수 설정
