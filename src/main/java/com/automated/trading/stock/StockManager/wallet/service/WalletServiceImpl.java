@@ -1,6 +1,6 @@
 package com.automated.trading.stock.StockManager.wallet.service;
 
-import com.automated.trading.stock.StockManager.util.config.Encryption;
+import com.automated.trading.stock.StockManager.util.config.CryptionSecurity;
 import com.automated.trading.stock.StockManager.wallet.domain.KeyPairRepository;
 import com.automated.trading.stock.StockManager.wallet.domain.WalletRepository;
 import com.automated.trading.stock.StockManager.wallet.dto.SearchKeyPairDto;
@@ -20,12 +20,12 @@ public class WalletServiceImpl implements WalletService {
         Security.addProvider(new BouncyCastleProvider());
     }
 
-    private final Encryption encryption;
+    private final CryptionSecurity cryptionSecurity;
     private final WalletRepository walletRepository;
     private final KeyPairRepository keyPairRepository;
 
-    public WalletServiceImpl(Encryption encryption, WalletRepository walletRepository, KeyPairRepository keyPairRepository) {
-        this.encryption = encryption;
+    public WalletServiceImpl(CryptionSecurity cryptionSecurity, WalletRepository walletRepository, KeyPairRepository keyPairRepository) {
+        this.cryptionSecurity = cryptionSecurity;
         this.walletRepository = walletRepository;
         this.keyPairRepository = keyPairRepository;
     }
@@ -45,9 +45,9 @@ public class WalletServiceImpl implements WalletService {
 
             KeyPair keyPair = keyPairGenerator.generateKeyPair();
             String[] pairs = getStrings(keyPair);
-            String priKey = encryption.encrypt(pairs[0]);
-            String pubKeyX = encryption.encrypt(pairs[1]);
-            String pubKeyY = encryption.encrypt(pairs[2]);
+            String priKey = cryptionSecurity.encrypt(pairs[0]);
+            String pubKeyX = cryptionSecurity.encrypt(pairs[1]);
+            String pubKeyY = cryptionSecurity.encrypt(pairs[2]);
             com.automated.trading.stock.StockManager.wallet.domain.KeyPair newPair = new com.automated.trading.stock.StockManager.wallet.domain.KeyPair(priKey, pubKeyX, pubKeyY);
             keyPairRepository.save(newPair);
 
@@ -82,13 +82,13 @@ public class WalletServiceImpl implements WalletService {
      */
     @Override
     public Boolean checkKey(SearchKeyPairDto searchKeyPairDto, String privateKey) throws Exception {    // privateKey : 사용자 입력 Key
-        String pubKeyX = encryption.decrypt(searchKeyPairDto.getPublicKeyX());
-        String pubKeyY = encryption.decrypt(searchKeyPairDto.getPublicKeyY());
+        String pubKeyX = cryptionSecurity.decrypt(searchKeyPairDto.getPublicKeyX());
+        String pubKeyY = cryptionSecurity.decrypt(searchKeyPairDto.getPublicKeyY());
         String priKey;
 
         Optional<com.automated.trading.stock.StockManager.wallet.domain.KeyPair> byPublicKey = keyPairRepository.findByPublicKey(pubKeyX, pubKeyY);
         if (byPublicKey.isPresent()) {
-            priKey = encryption.decrypt(byPublicKey.get().getPrivateKey());
+            priKey = cryptionSecurity.decrypt(byPublicKey.get().getPrivateKey());
             return priKey.equals(privateKey);
         }
         return false;
