@@ -29,5 +29,6 @@ jobs:
           echo "DB_PostgreSQL_URL=${{ secrets.DB_POSTGRESQL_URL }}" >> $GITHUB_ENV
           echo "DB_PostgreSQL_NAME=${{ secrets.DB_POSTGRESQL_NAME }}" >> $GITHUB_ENV
           echo "DB_PostgreSQL_PASSWORD=${{ secrets.DB_POSTGRESQL_PASSWORD }}" >> $GITHUB_ENV
+          echo "ENCRYPT_KEY=${{ secrets.ENCRYPT_KEY }}" >> $GITHUB_ENV
       - name: Build with Gradle
         run: ./gradlew build
