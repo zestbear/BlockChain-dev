@@ -1,4 +1,4 @@
-package com.automated.trading.stock.StockManager.member;
+package com.automated.trading.stock.StockManager.stock.member;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -1,8 +1,8 @@
 package com.automated.trading.stock.StockManager.stock.wallet;
 
-import com.automated.trading.stock.StockManager.stock.wallet.domain.KeyPairRepository;
-import com.automated.trading.stock.StockManager.stock.wallet.domain.WalletRepository;
 import com.automated.trading.stock.StockManager.util.config.CryptionSecurity;
+import com.automated.trading.stock.StockManager.wallet.domain.KeyPairRepository;
+import com.automated.trading.stock.StockManager.wallet.domain.WalletRepository;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,7 +47,7 @@ public class WalletServiceImpl implements WalletService {
             String priKey = cryptionSecurity.encrypt(pairs[0]);
             String pubKeyX = cryptionSecurity.encrypt(pairs[1]);
             String pubKeyY = cryptionSecurity.encrypt(pairs[2]);
-            com.automated.trading.stock.StockManager.stock.wallet.domain.KeyPair newPair = new com.automated.trading.stock.StockManager.stock.wallet.domain.KeyPair(priKey, pubKeyX, pubKeyY);
+            com.automated.trading.stock.StockManager.wallet.domain.KeyPair newPair = new com.automated.trading.stock.StockManager.wallet.domain.KeyPair(priKey, pubKeyX, pubKeyY);
             keyPairRepository.save(newPair);
 
             return getStrings(keyPair);
@@ -85,7 +85,7 @@ public class WalletServiceImpl implements WalletService {
         String pubKeyY = cryptionSecurity.decrypt(searchKeyPairDto.getPublicKeyY());
         String priKey;
 
-        Optional<com.automated.trading.stock.StockManager.stock.wallet.domain.KeyPair> byPublicKey = keyPairRepository.findByPublicKey(pubKeyX, pubKeyY);
+        Optional<com.automated.trading.stock.StockManager.wallet.domain.KeyPair> byPublicKey = keyPairRepository.findByPublicKey(pubKeyX, pubKeyY);
         if (byPublicKey.isPresent()) {
             priKey = cryptionSecurity.decrypt(byPublicKey.get().getPrivateKey());
             return priKey.equals(privateKey);

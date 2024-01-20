@@ -1,26 +1,14 @@
 package com.automated.trading.stock.StockManager.stock.block;
 
-import com.automated.trading.stock.StockManager.stock.block.domain.Block;
-import com.automated.trading.stock.StockManager.stock.block.domain.BlockRepository;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.time.LocalDate;
-import java.util.Optional;
 
 @Service
 @Transactional
 public class BlockServiceImpl implements BlockService {
-
-    private final BlockRepository blockRepository;
-
-    public BlockServiceImpl(BlockRepository blockRepository) {
-        this.blockRepository = blockRepository;
-    }
 
     /*
         새로 생성되는 Block의 Hash 생성
@@ -55,39 +43,39 @@ public class BlockServiceImpl implements BlockService {
 
         [2024-01-16] count() 함수에서 오류 날 가능성이 있음 --> 테스트 필요
     */
-    @Override
-    public void generateBlock(String hash) throws JsonProcessingException {
-        String previousHash = null;
-        String timeStamp = LocalDate.now().toString();
-        String data = null;
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        long count = blockRepository.count();
-        if (count > 1L) {
-            Optional<Block> byId = blockRepository.findById(count - 1L);
-            Block preBlock;
-            if (byId.isPresent()) {
-                preBlock = byId.get();
-
-                previousHash = preBlock.getPreviousHash();
-                data = objectMapper.writeValueAsString(preBlock.getData());
-            }
-        }
-
-        GenerateHashDto dto = GenerateHashDto.builder()
-                .previousHash(previousHash)
-                .data(data)
-                .timeStamp(timeStamp)
-                .build();
-
-        Block newBlock = Block.builder()
-                .hash(generateHash(dto))
-                .previousHash(previousHash)
-                .data(data)
-                .timeStamp(timeStamp)
-                .build();
-
-        blockRepository.save(newBlock);
-    }
+//    @Override
+//    public void generateBlock(String hash) throws JsonProcessingException {
+//        String previousHash = null;
+//        String timeStamp = LocalDate.now().toString();
+//        String data = null;
+//        ObjectMapper objectMapper = new ObjectMapper();
+//
+//        long count = blockRepository.count();
+//        if (count > 1L) {
+//            Optional<Block> byId = blockRepository.findById(count - 1L);
+//            Block preBlock;
+//            if (byId.isPresent()) {
+//                preBlock = byId.get();
+//
+//                previousHash = preBlock.getPreviousHash();
+//                data = objectMapper.writeValueAsString(preBlock.getData());
+//            }
+//        }
+//
+//        GenerateHashDto dto = GenerateHashDto.builder()
+//                .previousHash(previousHash)
+//                .data(data)
+//                .timeStamp(timeStamp)
+//                .build();
+//
+//        Block newBlock = Block.builder()
+//                .hash(generateHash(dto))
+//                .previousHash(previousHash)
+//                .data(data)
+//                .timeStamp(timeStamp)
+//                .build();
+//
+//        blockRepository.save(newBlock);
+//    }
 
 }

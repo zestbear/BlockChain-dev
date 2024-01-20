@@ -1,7 +1,5 @@
 package com.automated.trading.stock.StockManager.stock.post;
 
-import com.automated.trading.stock.StockManager.stock.post.dto.PostSaveRequestDto;
-import com.automated.trading.stock.StockManager.stock.post.dto.PostUpdateRequestDto;
 import org.springframework.stereotype.Service;
 
 @Service
