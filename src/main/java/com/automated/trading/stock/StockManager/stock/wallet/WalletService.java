@@ -4,6 +4,6 @@ public interface WalletService {
 
     public String[] createKeypair();
 
-    public Boolean checkKey(SearchKeyPairDto searchKeyPairDto, String privateKey) throws Exception;
+//    public Boolean checkKey(SearchKeyPairDto searchKeyPairDto, String privateKey) throws Exception;
 
 }

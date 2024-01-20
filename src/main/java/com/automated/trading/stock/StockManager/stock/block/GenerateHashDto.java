@@ -1,7 +1,5 @@
 package com.automated.trading.stock.StockManager.stock.block;
 
-import com.automated.trading.stock.StockManager.block.domain.Block;
-import lombok.Builder;
 import lombok.Getter;
 
 @Getter

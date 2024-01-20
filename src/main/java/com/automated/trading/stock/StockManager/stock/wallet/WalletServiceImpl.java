@@ -1,8 +1,6 @@
 package com.automated.trading.stock.StockManager.stock.wallet;
 
 import com.automated.trading.stock.StockManager.util.config.CryptionSecurity;
-import com.automated.trading.stock.StockManager.wallet.domain.KeyPairRepository;
-import com.automated.trading.stock.StockManager.wallet.domain.WalletRepository;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,13 +18,9 @@ public class WalletServiceImpl implements WalletService {
     }
 
     private final CryptionSecurity cryptionSecurity;
-    private final WalletRepository walletRepository;
-    private final KeyPairRepository keyPairRepository;
 
-    public WalletServiceImpl(CryptionSecurity cryptionSecurity, WalletRepository walletRepository, KeyPairRepository keyPairRepository) {
+    public WalletServiceImpl(CryptionSecurity cryptionSecurity) {
         this.cryptionSecurity = cryptionSecurity;
-        this.walletRepository = walletRepository;
-        this.keyPairRepository = keyPairRepository;
     }
 
     /*
@@ -47,8 +41,8 @@ public class WalletServiceImpl implements WalletService {
             String priKey = cryptionSecurity.encrypt(pairs[0]);
             String pubKeyX = cryptionSecurity.encrypt(pairs[1]);
             String pubKeyY = cryptionSecurity.encrypt(pairs[2]);
-            com.automated.trading.stock.StockManager.wallet.domain.KeyPair newPair = new com.automated.trading.stock.StockManager.wallet.domain.KeyPair(priKey, pubKeyX, pubKeyY);
-            keyPairRepository.save(newPair);
+//            com.automated.trading.stock.StockManager.wallet.domain.KeyPair newPair = new com.automated.trading.stock.StockManager.wallet.domain.KeyPair(priKey, pubKeyX, pubKeyY);
+//            keyPairRepository.save(newPair);
 
             return getStrings(keyPair);
         } catch (Exception e) {
@@ -79,18 +73,18 @@ public class WalletServiceImpl implements WalletService {
         Transaction (거래) 이 일어날 때 사용
         Cryptographic signature (서명) 을 할 때 사용자가 입력한 개인키가 맞는지 확인
      */
-    @Override
-    public Boolean checkKey(SearchKeyPairDto searchKeyPairDto, String privateKey) throws Exception {    // privateKey : 사용자 입력 Key
-        String pubKeyX = cryptionSecurity.decrypt(searchKeyPairDto.getPublicKeyX());
-        String pubKeyY = cryptionSecurity.decrypt(searchKeyPairDto.getPublicKeyY());
-        String priKey;
-
-        Optional<com.automated.trading.stock.StockManager.wallet.domain.KeyPair> byPublicKey = keyPairRepository.findByPublicKey(pubKeyX, pubKeyY);
-        if (byPublicKey.isPresent()) {
-            priKey = cryptionSecurity.decrypt(byPublicKey.get().getPrivateKey());
-            return priKey.equals(privateKey);
-        }
-        return false;
-    }
+//    @Override
+//    public Boolean checkKey(SearchKeyPairDto searchKeyPairDto, String privateKey) throws Exception {    // privateKey : 사용자 입력 Key
+//        String pubKeyX = cryptionSecurity.decrypt(searchKeyPairDto.getPublicKeyX());
+//        String pubKeyY = cryptionSecurity.decrypt(searchKeyPairDto.getPublicKeyY());
+//        String priKey;
+//
+//        Optional<com.automated.trading.stock.StockManager.wallet.domain.KeyPair> byPublicKey = keyPairRepository.findByPublicKey(pubKeyX, pubKeyY);
+//        if (byPublicKey.isPresent()) {
+//            priKey = cryptionSecurity.decrypt(byPublicKey.get().getPrivateKey());
+//            return priKey.equals(privateKey);
+//        }
+//        return false;
+//    }
 
 }
