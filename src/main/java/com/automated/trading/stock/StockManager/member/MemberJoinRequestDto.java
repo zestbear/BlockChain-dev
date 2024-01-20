@@ -1,18 +1,17 @@
-package com.automated.trading.stock.StockManager.member.controller.dto;
+package com.automated.trading.stock.StockManager.member;
 
-import com.automated.trading.stock.StockManager.member.domain.Member;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class JoinRequestDto {
+public class MemberJoinRequestDto {
     private String loginID;
     private String loginPW;
     private String nickName;
     private String email;
 
     @Builder
-    public JoinRequestDto(String loginID, String loginPW, String nickName, String email) {
+    public MemberJoinRequestDto(String loginID, String loginPW, String nickName, String email) {
         this.loginID = loginID;
         this.loginPW = loginPW;
         this.nickName = nickName;

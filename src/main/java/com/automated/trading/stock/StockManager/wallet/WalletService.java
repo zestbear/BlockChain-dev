@@ -1,6 +1,6 @@
-package com.automated.trading.stock.StockManager.wallet.service;
+package com.automated.trading.stock.StockManager.wallet;
 
-import com.automated.trading.stock.StockManager.wallet.dto.SearchKeyPairDto;
+import com.automated.trading.stock.StockManager.keypair.SearchKeyPairDto;
 
 public interface WalletService {
 

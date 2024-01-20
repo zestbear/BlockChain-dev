@@ -1,9 +1,9 @@
-package com.automated.trading.stock.StockManager.wallet.service;
+package com.automated.trading.stock.StockManager.wallet;
 
 import com.automated.trading.stock.StockManager.util.config.CryptionSecurity;
 import com.automated.trading.stock.StockManager.wallet.domain.KeyPairRepository;
 import com.automated.trading.stock.StockManager.wallet.domain.WalletRepository;
-import com.automated.trading.stock.StockManager.wallet.dto.SearchKeyPairDto;
+import com.automated.trading.stock.StockManager.keypair.SearchKeyPairDto;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

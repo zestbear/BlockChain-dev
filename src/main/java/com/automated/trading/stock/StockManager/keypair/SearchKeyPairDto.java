@@ -1,4 +1,4 @@
-package com.automated.trading.stock.StockManager.wallet.dto;
+package com.automated.trading.stock.StockManager.keypair;
 
 import com.automated.trading.stock.StockManager.wallet.domain.KeyPair;
 import lombok.Builder;

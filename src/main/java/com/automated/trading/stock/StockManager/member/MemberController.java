@@ -1,4 +1,4 @@
-package com.automated.trading.stock.StockManager.member.controller;
+package com.automated.trading.stock.StockManager.member;
 
 import org.springframework.stereotype.Controller;
 

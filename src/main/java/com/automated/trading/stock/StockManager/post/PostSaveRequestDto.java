@@ -1,4 +1,4 @@
-package com.automated.trading.stock.StockManager.post.dto;
+package com.automated.trading.stock.StockManager.post;
 
 import lombok.Builder;
 import lombok.Getter;
