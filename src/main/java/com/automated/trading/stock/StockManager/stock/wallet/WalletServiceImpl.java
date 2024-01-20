@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.security.*;
 import java.security.spec.ECGenParameterSpec;
-import java.util.Optional;
 
 @Service
 @Transactional
