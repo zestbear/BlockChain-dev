@@ -1,6 +1,6 @@
 package com.automated.trading.stock.StockManager.stock.wallet;
 
-import com.automated.trading.stock.StockManager.util.config.CryptionSecurity;
+import com.automated.trading.stock.StockManager.util.config.CrypticSecurity;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,10 +16,10 @@ public class WalletServiceImpl implements WalletService {
         Security.addProvider(new BouncyCastleProvider());
     }
 
-    private final CryptionSecurity cryptionSecurity;
+    private final CrypticSecurity crypticSecurity;
 
-    public WalletServiceImpl(CryptionSecurity cryptionSecurity) {
-        this.cryptionSecurity = cryptionSecurity;
+    public WalletServiceImpl(CrypticSecurity crypticSecurity) {
+        this.crypticSecurity = crypticSecurity;
     }
 
     /*
@@ -37,9 +37,9 @@ public class WalletServiceImpl implements WalletService {
 
             KeyPair keyPair = keyPairGenerator.generateKeyPair();
             String[] pairs = getStrings(keyPair);
-            String priKey = cryptionSecurity.encrypt(pairs[0]);
-            String pubKeyX = cryptionSecurity.encrypt(pairs[1]);
-            String pubKeyY = cryptionSecurity.encrypt(pairs[2]);
+            String priKey = crypticSecurity.encrypt(pairs[0]);
+            String pubKeyX = crypticSecurity.encrypt(pairs[1]);
+            String pubKeyY = crypticSecurity.encrypt(pairs[2]);
 //            com.automated.trading.stock.StockManager.wallet.domain.KeyPair newPair = new com.automated.trading.stock.StockManager.wallet.domain.KeyPair(priKey, pubKeyX, pubKeyY);
 //            keyPairRepository.save(newPair);
 
