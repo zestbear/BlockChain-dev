@@ -7,14 +7,14 @@
 <mapper namespace="com.automated.trading.stock.StockManager.stock.notice.NoticeMapper">
 
     <resultMap id="NoticeResultMap" type="com.automated.trading.stock.StockManager.stock.notice.NoticeDto">
-        <id property="id" column="notice_id" />
+        <id property="notice_id" column="notice_id" />
         <result property="title" column="title" />
         <result property="content" column="content" />
-        <result property="postType" column="post_type" />
-        <result property="writeDate" column="wrt_dt" />
-        <result property="modifyDate" column="mod_dt" />
-        <result property="importance" column="imprtnc" />
-        <result property="memberId" column="member_id" />
+        <result property="post_type" column="post_type" />
+        <result property="wrt_dt" column="wrt_dt" />
+        <result property="mod_dt" column="mod_dt" />
+        <result property="imprtnc" column="imprtnc" />
+        <result property="member_id" column="member_id" />
     </resultMap>
     
     <insert id="saveNotice" parameterType="com.automated.trading.stock.StockManager.stock.notice.NoticeDto">
@@ -42,5 +42,16 @@
         DELETE FROM stockdb.public.notice
         WHERE notice_id = #{notice_id} and member_id = #{member_id};
     </delete>
+    
+    <select id="findAllNotices" resultMap="NoticeResultMap">
+        SELECT *
+        FROM stockdb.public.notice
+        ORDER BY notice_id;
+    </select>
+
+    <select id="findById" resultMap="NoticeResultMap" parameterType="int">
+        SELECT * FROM stockdb.public.notice
+        WHERE notice_id = #{id}
+    </select>
 
 </mapper>
