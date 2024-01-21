@@ -61,12 +61,12 @@ public class NoticeController {
         return ResponseEntity.ok("Notice deleted successfully");
     }
 
-    @PostMapping("/notice/getAll")
+    @GetMapping("/notice/getAll")
     public List<NoticeDto> findAllNotices() {
         return noticeService.findAllNotices();
     }
 
-    @PostMapping("/notice/getNotice/{notice_id}")
+    @GetMapping("/notice/getNotice/{notice_id}")
     public NoticeDto findById(@PathVariable("notice_id") int notice_id) {
         return noticeService.findById(notice_id);
     }
