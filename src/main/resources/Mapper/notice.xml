@@ -1,0 +1,19 @@
+<!-- notice.xml -->
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.NoticeMapper">
+
+    <resultMap id="NoticeResultMap" type="com.automated.trading.stock.StockManager.stock.notice.NoticeDto">
+        <id property="id" column="notice_id" />
+        <result property="title" column="title" />
+        <result property="content" column="content" />
+        <result property="postType" column="post_type" />
+        <result property="writeDate" column="wrt_dt" />
+        <result property="importance" column="imprtnc" />
+        <result property="memberId" column="member_id" />
+    </resultMap>
+
+</mapper>
