@@ -4,14 +4,14 @@ import java.util.List;
 
 public interface NoticeService {
 
-    public void saveNotice(NoticeDto dto);
+    void saveNotice(NoticeDto dto);
 
-    public void updateNotice(NoticeDto dto);
+    void updateNotice(NoticeDto dto);
 
-    public void deleteNotice(NoticeDto dto);
+    void deleteNotice(NoticeDto dto);
 
-    public List<NoticeDto> findAllNotices();
+    List<NoticeDto> findAllNotices();
 
-    public NoticeDto findById(int notice_id);
+    NoticeDto findById(int notice_id);
 
 }
