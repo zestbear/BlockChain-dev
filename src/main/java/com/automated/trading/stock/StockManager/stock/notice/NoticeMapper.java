@@ -1,8 +1,11 @@
 package com.automated.trading.stock.StockManager.stock.notice;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import java.util.List;
 
-public interface NoticeService {
+@Mapper
+public interface NoticeMapper {
 
     void saveNotice(NoticeDto dto);
 
