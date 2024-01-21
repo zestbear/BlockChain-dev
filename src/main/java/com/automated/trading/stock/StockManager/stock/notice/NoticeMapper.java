@@ -7,13 +7,13 @@ import java.util.List;
 @Mapper
 public interface NoticeMapper {
 
-    List<NoticeDto> findAllNotices();
-
     void saveNotice(NoticeDto dto);
 
     void updateNotice(NoticeDto dto);
 
-    void deleteNotice(int notice_id);
+    void deleteNotice(NoticeDto dto);
+
+    List<NoticeDto> findAllNotices();
 
     NoticeDto findById(int notice_id);
 
