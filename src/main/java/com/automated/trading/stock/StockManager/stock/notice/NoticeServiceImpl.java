@@ -9,26 +9,35 @@ import java.util.List;
 @Transactional
 public class NoticeServiceImpl implements NoticeService {
 
+    private final NoticeMapper noticeMapper;
+
+    public NoticeServiceImpl(NoticeMapper noticeMapper) {
+        this.noticeMapper = noticeMapper;
+    }
+
     @Override
     public void saveNotice(NoticeDto dto) {
+        noticeMapper.saveNotice(dto);
     }
 
     @Override
     public void updateNotice(NoticeDto dto) {
+        noticeMapper.updateNotice(dto);
     }
 
     @Override
     public void deleteNotice(NoticeDto dto) {
+        noticeMapper.deleteNotice(dto);
     }
 
     @Override
     public List<NoticeDto> findAllNotices() {
-        return null;
+        return noticeMapper.findAllNotices();
     }
 
     @Override
     public NoticeDto findById(int notice_id) {
-        return null;
+        return noticeMapper.findById(notice_id);
     }
 
 }
