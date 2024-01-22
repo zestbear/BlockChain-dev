@@ -1,6 +1,8 @@
 package com.automated.trading.stock.StockManager.util.secrets;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.Cipher;
@@ -9,14 +11,8 @@ import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Base64;
 
-@Service
+@Configuration
 public class CrypticSecurity {
-
-    private EnvConfig envConfig;
-
-    public CrypticSecurity(EnvConfig envConfig) {
-        this.envConfig = envConfig;
-    }
 
     @Value("${stock.manager.encrypt.key}")
     private String KEY;
