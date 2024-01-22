@@ -1,6 +1,6 @@
 package com.automated.trading.stock.StockManager.stock.wallet;
 
-import com.automated.trading.stock.StockManager.util.config.CrypticSecurity;
+import com.automated.trading.stock.StockManager.util.secrets.CrypticSecurity;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
