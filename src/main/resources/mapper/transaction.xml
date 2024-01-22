@@ -1,0 +1,20 @@
+<!-- transaction.xml -->
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.automated.trading.stock.StockManager.stock.transaction.TransactionMapper">
+
+    <resultMap id="TransactionResultMap" type="com.automated.trading.stock.StockManager.stock.transaction.TransactionMapper">
+        <id property="transaction_id" column="transaction_id" />
+        <result property="sender_key" column="sender_key" />
+        <result property="receiver_key" column="receiver_key" />
+        <result property="count" column="count" />
+        <result property="transaction_input" column="transaction_input" />
+        <result property="transaction_output" column="transaction_output" />
+        <result property="tran_dt" column="tran_dt" />
+        <result property="data_id" column="data_id" />
+    </resultMap>
+
+</mapper>
