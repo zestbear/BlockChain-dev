@@ -25,7 +25,7 @@ public class WalletServiceImpl implements WalletService {
     /*
         KeyPair (개인키, 공개키) 생성
      */
-    @Transactional
+    @Override
     public String[] createKeypair() {
 
         try {
