@@ -1,4 +1,4 @@
-package com.automated.trading.stock.StockManager.util.config;
+package com.automated.trading.stock.StockManager.util.secrets;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
