@@ -4,9 +4,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.automated.trading.stock.StockManager.stock.notice.NoticeMapper">
+<mapper namespace="com.automated.trading.stock.StockManager.stock.post.notice.NoticeMapper">
 
-    <resultMap id="NoticeResultMap" type="com.automated.trading.stock.StockManager.stock.notice.NoticeDto">
+    <resultMap id="NoticeResultMap" type="com.automated.trading.stock.StockManager.stock.post.notice.NoticeDto">
         <id property="notice_id" column="notice_id" />
         <result property="title" column="title" />
         <result property="content" column="content" />
@@ -17,12 +17,12 @@
         <result property="member_id" column="member_id" />
     </resultMap>
     
-    <insert id="saveNotice" parameterType="com.automated.trading.stock.StockManager.stock.notice.NoticeDto">
+    <insert id="saveNotice" parameterType="com.automated.trading.stock.StockManager.stock.post.notice.NoticeDto">
         INSERT INTO stockdb.public.notice (title, content, imprtnc, member_id)
         VALUES (#{title}, #{content}, #{imprtnc}, #{member_id});
     </insert>
 
-    <update id="updateNotice" parameterType="com.automated.trading.stock.StockManager.stock.notice.NoticeDto">
+    <update id="updateNotice" parameterType="com.automated.trading.stock.StockManager.stock.post.notice.NoticeDto">
         UPDATE stockdb.public.notice
         SET
         <if test="title != null and title != ''">
@@ -38,7 +38,7 @@
         WHERE notice_id = #{notice_id} and member_id = #{member_id};
     </update>
 
-    <delete id="deleteNotice" parameterType="com.automated.trading.stock.StockManager.stock.notice.NoticeDto">
+    <delete id="deleteNotice" parameterType="com.automated.trading.stock.StockManager.stock.post.notice.NoticeDto">
         DELETE FROM stockdb.public.notice
         WHERE notice_id = #{notice_id} and member_id = #{member_id};
     </delete>

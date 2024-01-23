@@ -1,4 +1,4 @@
-package com.automated.trading.stock.StockManager.stock.notice;
+package com.automated.trading.stock.StockManager.stock.post.notice;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
