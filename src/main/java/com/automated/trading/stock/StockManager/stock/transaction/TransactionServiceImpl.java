@@ -40,9 +40,9 @@ public class TransactionServiceImpl implements TransactionService {
         return transactionMapper.findBySignature(signature);
     }
 
-    @Override
-    public List<TransactionDto> findByDateTime(String start_dt, String end_dt) {
-        return transactionMapper.findByDateTime(start_dt, end_dt);
-    }
+//    @Override
+//    public List<TransactionDto> findByDateTime(TransactionDto dto) {
+//        return transactionMapper.findByDateTime(dto);
+//    }
 
 }

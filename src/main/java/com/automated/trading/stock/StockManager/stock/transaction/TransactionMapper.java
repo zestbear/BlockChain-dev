@@ -17,6 +17,6 @@ public interface TransactionMapper {
 
     TransactionDto findBySignature(String signature);
 
-    List<TransactionDto> findByDateTime(String start_dt, String end_dt);
+//    List<TransactionDto> findByDateTime(String start_dt, String end_dt); // String start_dt, String end_dt
 
 }
