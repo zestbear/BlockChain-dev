@@ -17,4 +17,35 @@
         <result property="data_id" column="data_id" />
     </resultMap>
 
+    <insert id="transactionOccurred" parameterType="com.automated.trading.stock.StockManager.stock.transaction.TransactionDto">
+        INSERT INTO stockdb.public.transaction (sender_key, receiver_key, count, transaction_input, transaction_output, tran_dt, data_id)
+        VALUES (#{sender_key}, #{receiver_key}, #{count}, #{transaction_input}, #{transaction_output}, current_timestamp, #{data_id});
+    </insert>
+
+    <select id="getAllTransactions" resultMap="TransactionResultMap">
+        SELECT (sender_key, receiver_key, count)
+        FROM stockdb.public.transaction
+        ORDER BY transaction_id ASC;
+    </select>
+
+    <select id="findBySenderKey" resultMap="TransactionResultMap" parameterType="String">
+        SELECT (sender_key, receiver_key, count)
+        FROM stockdb.public.transaction
+        ORDER BY transaction_id ASC
+        WHERE sender_key = #{sender_key};
+    </select>
+
+    <select id="findByReceiverKey" resultMap="TransactionResultMap" parameterType="String">
+        SELECT (sender_key, receiver_key, count)
+        FROM stockdb.public.transaction
+        ORDER BY transaction_id ASC
+        WHERE receiver_key = #{receiver_key};
+    </select>
+
+    <select id="findBySignature" resultMap="TransactionResultMap" parameterType="String">
+        SELECT (sender_key, receiver_key, count)
+        FROM stockdb.public.transaction
+        WHERE signature = #{signature};
+    </select>
+
 </mapper>
