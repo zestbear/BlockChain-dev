@@ -29,12 +29,12 @@ public class NoticeController {
         return ResponseEntity.ok("Notice saved successfully");
     }
 
-    @PutMapping("/notice/update/{member_id}/{notice_id}")
+    @PutMapping("/notice/update/{member_id}/{post_fk}")
     public ResponseEntity<String> updateNotice(@PathVariable("member_id") int member_id,
-                             @PathVariable("notice_id") int notice_id,
+                             @PathVariable("post_fk") int post_fk,
                              @RequestBody NoticeDto dto) {
         dto.setMember_id(member_id);
-        dto.setNotice_id(notice_id);
+        dto.setPost_fk(post_fk);
 
         try {
             noticeService.updateNotice(dto);
@@ -45,12 +45,12 @@ public class NoticeController {
         return ResponseEntity.ok("Notice updated successfully");
     }
 
-    @DeleteMapping("/notice/delete/{member_id}/{notice_id}")
+    @DeleteMapping("/notice/delete/{member_id}/{post_fk}")
     public ResponseEntity<String> deleteNotice(@PathVariable("member_id") int member_id,
-                             @PathVariable("notice_id") int notice_id) {
+                             @PathVariable("post_fk") int post_fk) {
         NoticeDto dto = new NoticeDto();
         dto.setMember_id(member_id);
-        dto.setNotice_id(notice_id);
+        dto.setPost_fk(post_fk);
 
         try {
             noticeService.deleteNotice(dto);
