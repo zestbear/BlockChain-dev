@@ -6,10 +6,13 @@ import lombok.Setter;
 @Getter @Setter
 public class QnaDto {
 
-    private int qna_id;
+    private int post_fk;
+    private int member_id;
     private String title;
     private String content;
+    private String post_type;
     private String wrt_dt;
     private String mod_dt;
+    private Boolean secret;
 
 }
