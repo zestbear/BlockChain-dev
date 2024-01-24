@@ -4,10 +4,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.automated.trading.stock.StockManager.stock.notice.NoticeMapper">
+<mapper namespace="com.automated.trading.stock.StockManager.stock.post.notice.NoticeMapper">
 
-    <resultMap id="NoticeResultMap" type="com.automated.trading.stock.StockManager.stock.notice.NoticeDto">
-        <id property="notice_id" column="notice_id" />
+    <resultMap id="NoticeResultMap" type="com.automated.trading.stock.StockManager.stock.post.notice.NoticeDto">
+        <id property="post_fk" column="post_fk" />
         <result property="title" column="title" />
         <result property="content" column="content" />
         <result property="post_type" column="post_type" />
@@ -16,14 +16,16 @@
         <result property="imprtnc" column="imprtnc" />
         <result property="member_id" column="member_id" />
     </resultMap>
-    
-    <insert id="saveNotice" parameterType="com.automated.trading.stock.StockManager.stock.notice.NoticeDto">
-        INSERT INTO stockdb.public.notice (title, content, imprtnc, member_id)
-        VALUES (#{title}, #{content}, #{imprtnc}, #{member_id});
+
+    <insert id="saveNotice" parameterType="com.automated.trading.stock.StockManager.stock.post.notice.NoticeDto">
+        INSERT INTO post (title, content, wrt_dt, member_id, post_type)
+        VALUES (#{title}, #{content}, current_timestamp, #{member_id}, 'notice');
+        INSERT INTO notice (post_fk, imprtnc)
+        VALUES (currval('post_post_id_seq'), #{imprtnc});
     </insert>
 
-    <update id="updateNotice" parameterType="com.automated.trading.stock.StockManager.stock.notice.NoticeDto">
-        UPDATE stockdb.public.notice
+    <update id="updateNotice" parameterType="com.automated.trading.stock.StockManager.stock.post.notice.NoticeDto">
+        UPDATE post
         SET
         <if test="title != null and title != ''">
             title = #{title},
@@ -31,27 +33,29 @@
         <if test="content != null and content != ''">
             content = #{content},
         </if>
-        <if test="imprtnc != null">
-            imprtnc = #{imprtnc},
-        </if>
-        mod_dt = current_timestamp
-        WHERE notice_id = #{notice_id} and member_id = #{member_id};
+        mod_dt = CURRENT_TIMESTAMP
+        WHERE post_id = #{post_fk} and member_id = #{member_id};
     </update>
 
-    <delete id="deleteNotice" parameterType="com.automated.trading.stock.StockManager.stock.notice.NoticeDto">
-        DELETE FROM stockdb.public.notice
-        WHERE notice_id = #{notice_id} and member_id = #{member_id};
+    <delete id="deleteNotice" parameterType="com.automated.trading.stock.StockManager.stock.post.notice.NoticeDto">
+        DELETE FROM notice
+        WHERE post_fk = #{post_fk};
+        DELETE FROM post
+        WHERE post_id = #{post_fk} and member_id = #{member_id};
     </delete>
     
     <select id="findAllNotices" resultMap="NoticeResultMap">
         SELECT *
-        FROM stockdb.public.notice
-        ORDER BY notice_id;
+        FROM post JOIN notice
+        ON post.post_id = notice.post_fk
+        ORDER BY post_id;
     </select>
 
     <select id="findById" resultMap="NoticeResultMap" parameterType="int">
-        SELECT * FROM stockdb.public.notice
-        WHERE notice_id = #{id}
+        SELECT *
+        FROM post JOIN notice
+        ON post.post_id = notice.post_fk
+        WHERE post_id = #{id};
     </select>
 
 </mapper>

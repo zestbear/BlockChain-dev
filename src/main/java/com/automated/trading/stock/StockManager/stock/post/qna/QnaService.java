@@ -1,6 +1,6 @@
-package com.automated.trading.stock.StockManager.stock.qna;
+package com.automated.trading.stock.StockManager.stock.post.qna;
 
-import com.automated.trading.stock.StockManager.stock.notice.NoticeDto;
+import com.automated.trading.stock.StockManager.stock.post.notice.NoticeDto;
 
 public interface QnaService {
 

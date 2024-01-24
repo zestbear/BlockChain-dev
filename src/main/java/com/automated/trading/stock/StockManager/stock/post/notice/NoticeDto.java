@@ -1,4 +1,4 @@
-package com.automated.trading.stock.StockManager.stock.notice;
+package com.automated.trading.stock.StockManager.stock.post.notice;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter @Setter
 public class NoticeDto {
 
-    private int notice_id;
+    private int post_fk;
     private int member_id;
     private String title;
     private String content;
