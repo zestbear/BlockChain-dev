@@ -7,7 +7,7 @@
 <mapper namespace="com.automated.trading.stock.StockManager.stock.post.notice.NoticeMapper">
 
     <resultMap id="NoticeResultMap" type="com.automated.trading.stock.StockManager.stock.post.notice.NoticeDto">
-        <id property="notice_id" column="notice_id" />
+        <id property="post_fk" column="post_fk" />
         <result property="title" column="title" />
         <result property="content" column="content" />
         <result property="post_type" column="post_type" />
@@ -18,8 +18,10 @@
     </resultMap>
     
     <insert id="saveNotice" parameterType="com.automated.trading.stock.StockManager.stock.post.notice.NoticeDto">
-        INSERT INTO stockdb.public.notice (title, content, imprtnc, member_id)
-        VALUES (#{title}, #{content}, #{imprtnc}, #{member_id});
+        INSERT INTO stockdb.public.post (title, content, wrt_dt, member_id, post_type)
+        VALUES (#{title}, #{content}, current_timestamp, #{member_id}, 'notice');
+        INSERT INTO stockdb.public.notice (post_fk, imprtnc)
+        VALUES (currval('post_post_id_seq'), #{imprtnc});
     </insert>
 
     <update id="updateNotice" parameterType="com.automated.trading.stock.StockManager.stock.post.notice.NoticeDto">
