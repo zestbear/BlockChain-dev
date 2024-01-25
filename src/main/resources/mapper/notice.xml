@@ -6,7 +6,7 @@
 
 <mapper namespace="com.automated.trading.stock.StockManager.stock.post.notice.NoticeMapper">
 
-    <resultMap id="NoticeResultMap" type="com.automated.trading.stock.StockManager.stock.post.notice.NoticeDto">
+    <resultMap id="NoticeResultMap" type="com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeListResponseDto">
         <id property="post_fk" column="post_fk" />
         <result property="title" column="title" />
         <result property="content" column="content" />
@@ -17,15 +17,15 @@
         <result property="member_id" column="member_id" />
     </resultMap>
 
-    <insert id="saveNotice" parameterType="com.automated.trading.stock.StockManager.stock.post.notice.NoticeDto">
-        INSERT INTO post (title, content, wrt_dt, member_id, post_type)
+    <insert id="saveNotice" parameterType="com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeSaveRequestDto">
+        INSERT INTO stockdb.public.post (title, content, wrt_dt, member_id, post_type)
         VALUES (#{title}, #{content}, current_timestamp, #{member_id}, 'notice');
-        INSERT INTO notice (post_fk, imprtnc)
+        INSERT INTO stockdb.public.notice (post_fk, imprtnc)
         VALUES (currval('post_post_id_seq'), #{imprtnc});
     </insert>
 
-    <update id="updateNotice" parameterType="com.automated.trading.stock.StockManager.stock.post.notice.NoticeDto">
-        UPDATE post
+    <update id="updateNotice" parameterType="com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeUpdateRequestDto">
+        UPDATE stockdb.public.post
         SET
         <if test="title != null and title != ''">
             title = #{title},
@@ -37,25 +37,25 @@
         WHERE post_id = #{post_fk} and member_id = #{member_id};
     </update>
 
-    <delete id="deleteNotice" parameterType="com.automated.trading.stock.StockManager.stock.post.notice.NoticeDto">
-        DELETE FROM notice
+    <delete id="deleteNotice" parameterType="com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeDeleteRequestDto">
+        DELETE FROM stockdb.public.notice
         WHERE post_fk = #{post_fk};
-        DELETE FROM post
+        DELETE FROM stockdb.public.post
         WHERE post_id = #{post_fk} and member_id = #{member_id};
     </delete>
     
     <select id="findAllNotices" resultMap="NoticeResultMap">
         SELECT *
-        FROM post JOIN notice
+        FROM stockdb.public.post JOIN stockdb.public.notice
         ON post.post_id = notice.post_fk
         ORDER BY post_id;
     </select>
 
     <select id="findById" resultMap="NoticeResultMap" parameterType="int">
         SELECT *
-        FROM post JOIN notice
+        FROM stockdb.public.post JOIN stockdb.public.notice
         ON post.post_id = notice.post_fk
-        WHERE post_id = #{id};
+        WHERE post_id = #{notice_id};
     </select>
 
 </mapper>

@@ -1,5 +1,9 @@
 package com.automated.trading.stock.StockManager.stock.post.notice;
 
+import com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeDeleteRequestDto;
+import com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeListResponseDto;
+import com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeSaveRequestDto;
+import com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeUpdateRequestDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +21,7 @@ public class NoticeController {
 
     @PostMapping("/notice/save/{member_id}")
     public ResponseEntity<String> saveNotice(@PathVariable("member_id") int member_id,
-                                             @RequestBody NoticeDto dto) {
+                                             @RequestBody NoticeSaveRequestDto dto) {
         dto.setMember_id(member_id);
 
         try {
@@ -32,7 +36,7 @@ public class NoticeController {
     @PutMapping("/notice/update/{member_id}/{post_fk}")
     public ResponseEntity<String> updateNotice(@PathVariable("member_id") int member_id,
                              @PathVariable("post_fk") int post_fk,
-                             @RequestBody NoticeDto dto) {
+                             @RequestBody NoticeUpdateRequestDto dto) {
         dto.setMember_id(member_id);
         dto.setPost_fk(post_fk);
 
@@ -48,7 +52,7 @@ public class NoticeController {
     @DeleteMapping("/notice/delete/{member_id}/{post_fk}")
     public ResponseEntity<String> deleteNotice(@PathVariable("member_id") int member_id,
                              @PathVariable("post_fk") int post_fk) {
-        NoticeDto dto = new NoticeDto();
+        NoticeDeleteRequestDto dto = new NoticeDeleteRequestDto();
         dto.setMember_id(member_id);
         dto.setPost_fk(post_fk);
 
@@ -62,12 +66,12 @@ public class NoticeController {
     }
 
     @GetMapping("/notice/getAll")
-    public List<NoticeDto> findAllNotices() {
+    public List<NoticeListResponseDto> findAllNotices() {
         return noticeService.findAllNotices();
     }
 
     @GetMapping("/notice/getNotice/{notice_id}")
-    public NoticeDto findById(@PathVariable("notice_id") int notice_id) {
+    public NoticeListResponseDto findById(@PathVariable("notice_id") int notice_id) {
         return noticeService.findById(notice_id);
     }
 

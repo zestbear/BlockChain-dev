@@ -1,17 +1,22 @@
 package com.automated.trading.stock.StockManager.stock.post.notice;
 
+import com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeDeleteRequestDto;
+import com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeListResponseDto;
+import com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeSaveRequestDto;
+import com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeUpdateRequestDto;
+
 import java.util.List;
 
 public interface NoticeService {
 
-    void saveNotice(NoticeDto dto);
+    void saveNotice(NoticeSaveRequestDto dto);
 
-    void updateNotice(NoticeDto dto);
+    void updateNotice(NoticeUpdateRequestDto dto);
 
-    void deleteNotice(NoticeDto dto);
+    void deleteNotice(NoticeDeleteRequestDto dto);
 
-    List<NoticeDto> findAllNotices();
+    List<NoticeListResponseDto> findAllNotices();
 
-    NoticeDto findById(int notice_id);
+    NoticeListResponseDto findById(int notice_id);
 
 }
