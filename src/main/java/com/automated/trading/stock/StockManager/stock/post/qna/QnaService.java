@@ -1,14 +1,22 @@
 package com.automated.trading.stock.StockManager.stock.post.qna;
 
-import com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeSaveRequestDto;
-import com.automated.trading.stock.StockManager.stock.post.qna.dto.QnaDto;
+import com.automated.trading.stock.StockManager.stock.post.qna.dto.QnaDeleteRequestDto;
+import com.automated.trading.stock.StockManager.stock.post.qna.dto.QnaListResponseDto;
+import com.automated.trading.stock.StockManager.stock.post.qna.dto.QnaSaveRequestDto;
+import com.automated.trading.stock.StockManager.stock.post.qna.dto.QnaUpdateRequestDto;
+
+import java.util.List;
 
 public interface QnaService {
 
-    public void postSave(QnaDto dto);
+    void saveQna(QnaSaveRequestDto dto);
 
-    public void postUpdate(NoticeSaveRequestDto dto);
+    void updateQna(QnaUpdateRequestDto dto);
 
-    public void postDelete(Long postId);
+    void deleteQna(QnaDeleteRequestDto dto);
+
+    List<QnaListResponseDto> findAllQnas();
+
+    QnaListResponseDto findById(int qna_id);
 
 }
