@@ -7,6 +7,9 @@ import lombok.Setter;
 @Setter
 public class NoticeUpdateRequestDto {
 
+    /*
+        공지사항 수정을 위한 Dto
+     */
     private int member_id;
     private String title;
     private String content;

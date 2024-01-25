@@ -8,6 +8,9 @@ import lombok.Setter;
 @Setter
 public class NoticeListResponseDto {
 
+    /*
+        공지사항 List 반환을 위한 Dto
+     */
     private int member_id;
     private String title;
     private String content;
