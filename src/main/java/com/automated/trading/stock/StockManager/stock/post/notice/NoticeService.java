@@ -1,7 +1,7 @@
 package com.automated.trading.stock.StockManager.stock.post.notice;
 
 import com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeDeleteRequestDto;
-import com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeListResponseDto;
+import com.automated.trading.stock.StockManager.stock.post.notice.dto.ReturnNoticeResponseDto;
 import com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeSaveRequestDto;
 import com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeUpdateRequestDto;
 
@@ -15,8 +15,8 @@ public interface NoticeService {
 
     void deleteNotice(NoticeDeleteRequestDto dto);
 
-    List<NoticeListResponseDto> findAllNotices();
+    List<ReturnNoticeResponseDto> findAllNotices();
 
-    NoticeListResponseDto findById(int notice_id);
+    ReturnNoticeResponseDto findById(int notice_id);
 
 }

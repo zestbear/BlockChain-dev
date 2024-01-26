@@ -1,6 +1,5 @@
 package com.automated.trading.stock.StockManager.stock.post.qna;
 
-import com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeSaveRequestDto;
 import com.automated.trading.stock.StockManager.stock.post.qna.dto.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,12 +32,12 @@ public class QnaServiceImpl implements QnaService {
     }
 
     @Override
-    public List<QnaListResponseDto> findAllQnas() {
+    public List<ReturnQnaResponseDto> findAllQnas() {
         return qnaMapper.findAllQnas();
     }
 
     @Override
-    public QnaListResponseDto findById(int qna_id) {
+    public ReturnQnaResponseDto findById(int qna_id) {
         return qnaMapper.findById(qna_id);
     }
 
