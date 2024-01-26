@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 public class ContactSetStateRequestDto {
 
-    private ContactResponseType contactResponseType;
+    private ContactResponseType response_type;
 
     private String response_title;
     private String response_content;

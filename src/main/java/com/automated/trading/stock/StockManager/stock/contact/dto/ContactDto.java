@@ -16,6 +16,7 @@ public class ContactDto {
     private String response_title;
     private String response_content;
 
-    private ContactResponseType contactResponseType;
+    private String cntc_dt;
+    private ContactResponseType response_type;
 
 }

@@ -13,6 +13,6 @@ public class ContactListResponseDto {
     private String response_title;
     private String response_content;
 
-    private ContactResponseType contactResponseType;
+    private ContactResponseType response_type;
 
 }
