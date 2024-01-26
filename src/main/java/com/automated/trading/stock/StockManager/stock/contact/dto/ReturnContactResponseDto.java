@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class ContactListResponseDto {
+public class ReturnContactResponseDto {
 
     private String request_title;
     private String request_content;
