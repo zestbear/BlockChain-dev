@@ -4,7 +4,7 @@
 
 <mapper namespace="com.automated.trading.stock.StockManager.stock.post.qna.QnaMapper">
 
-    <resultMap id="NoticeResultMap" type="com.automated.trading.stock.StockManager.stock.post.qna.dto.QnaListResponseDto">
+    <resultMap id="QnaResultMap" type="com.automated.trading.stock.StockManager.stock.post.qna.dto.QnaListResponseDto">
         <id property="post_fk" column="post_fk" />
         <result property="title" column="title" />
         <result property="content" column="content" />
@@ -14,5 +14,44 @@
         <result property="secret" column="secret" />
         <result property="member_id" column="member_id" />
     </resultMap>
+
+    <insert id="saveQna" parameterType="com.automated.trading.stock.StockManager.stock.post.qna.dto.QnaSaveRequestDto">
+        INSERT INTO stockdb.public.post (title, content, post_type, wrt_dt, member_id)
+        VALUES (#{title}, #{content}, 'qna', current_timestamp, #{member_id});
+        INSERT INTO stockdb.public.qna (post_fk, secret)
+        VALUES (currval('post_post_id_seq'), #{secret});
+    </insert>
+
+    <update id="updateQna" parameterType="com.automated.trading.stock.StockManager.stock.post.qna.dto.QnaUpdateRequestDto">
+        UPDATE stockdb.public.post
+        SET
+        <if test="title != null and title != ''">
+            title = #{title},
+        </if>
+        <if test="content != null and content != ''">
+            content = #{content},
+        </if>
+        mod_dt = current_timestamp
+        WHERE post_id = #{post_fk} and member_id = #{member_id};
+    </update>
+
+    <delete id="deleteQna" parameterType="com.automated.trading.stock.StockManager.stock.post.qna.dto.QnaDeleteRequestDto">
+        DELETE FROM stockdb.public.qna
+        WHERE post_fk = #{post_fk};
+        DELETE FROM stockdb.public.post
+        WHERE post_id = #{post_fk} and member_id = #{member_id};
+    </delete>
+
+    <select id="findAllQnas" resultMap="QnaResultMap">
+        SELECT * FROM stockdb.public.post
+        JOIN stockdb.public.qna ON post.post_id = qna.post_fk
+        ORDER BY post_id ASC;
+    </select>
+
+    <select id="findById" resultMap="QnaResultMap" parameterType="int">
+        SELECT * FROM stockdb.public.post
+        JOIN stockdb.public.qna ON post.post_id = qna.post_fk
+        WHERE post_id = #{qna_id};
+    </select>
 
 </mapper>
