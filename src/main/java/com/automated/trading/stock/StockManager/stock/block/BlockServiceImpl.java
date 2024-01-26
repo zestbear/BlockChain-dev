@@ -1,5 +1,6 @@
 package com.automated.trading.stock.StockManager.stock.block;
 
+import com.automated.trading.stock.StockManager.stock.block.dto.GenerateHashDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +15,7 @@ public class BlockServiceImpl implements BlockService {
         새로 생성되는 Block의 Hash 생성
     */
     @Override
-    public String generateHash(GenerateHashDto generateHashDto) {
+    public synchronized String generateHash(GenerateHashDto generateHashDto) {
         try {
             String combinedData = generateHashDto.getPreviousHash() + generateHashDto.getData() + generateHashDto.getTimeStamp();
 
