@@ -6,7 +6,7 @@
 
 <mapper namespace="com.automated.trading.stock.StockManager.stock.post.notice.NoticeMapper">
 
-    <resultMap id="NoticeResultMap" type="com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeListResponseDto">
+    <resultMap id="NoticeResultMap" type="com.automated.trading.stock.StockManager.stock.post.notice.dto.ReturnNoticeResponseDto">
         <id property="post_fk" column="post_fk" />
         <result property="title" column="title" />
         <result property="content" column="content" />

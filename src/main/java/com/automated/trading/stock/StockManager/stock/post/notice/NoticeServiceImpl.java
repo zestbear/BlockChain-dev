@@ -1,7 +1,7 @@
 package com.automated.trading.stock.StockManager.stock.post.notice;
 
 import com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeDeleteRequestDto;
-import com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeListResponseDto;
+import com.automated.trading.stock.StockManager.stock.post.notice.dto.ReturnNoticeResponseDto;
 import com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeSaveRequestDto;
 import com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeUpdateRequestDto;
 import org.springframework.stereotype.Service;
@@ -35,12 +35,12 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public List<NoticeListResponseDto> findAllNotices() {
+    public List<ReturnNoticeResponseDto> findAllNotices() {
         return noticeMapper.findAllNotices();
     }
 
     @Override
-    public NoticeListResponseDto findById(int notice_id) {
+    public ReturnNoticeResponseDto findById(int notice_id) {
         return noticeMapper.findById(notice_id);
     }
 

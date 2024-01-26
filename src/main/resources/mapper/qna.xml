@@ -4,7 +4,7 @@
 
 <mapper namespace="com.automated.trading.stock.StockManager.stock.post.qna.QnaMapper">
 
-    <resultMap id="QnaResultMap" type="com.automated.trading.stock.StockManager.stock.post.qna.dto.QnaListResponseDto">
+    <resultMap id="QnaResultMap" type="com.automated.trading.stock.StockManager.stock.post.qna.dto.ReturnQnaResponseDto">
         <id property="post_fk" column="post_fk" />
         <result property="title" column="title" />
         <result property="content" column="content" />

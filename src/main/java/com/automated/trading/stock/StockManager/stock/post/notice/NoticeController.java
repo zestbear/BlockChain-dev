@@ -1,7 +1,7 @@
 package com.automated.trading.stock.StockManager.stock.post.notice;
 
 import com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeDeleteRequestDto;
-import com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeListResponseDto;
+import com.automated.trading.stock.StockManager.stock.post.notice.dto.ReturnNoticeResponseDto;
 import com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeSaveRequestDto;
 import com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeUpdateRequestDto;
 import lombok.extern.slf4j.Slf4j;
@@ -88,16 +88,16 @@ public class NoticeController {
     /*
         공지사항 모두 반환 Controller
      */
-    @GetMapping("/notice/getAll")
-    public List<NoticeListResponseDto> findAllNotices() {
+    @GetMapping("/notice")
+    public List<ReturnNoticeResponseDto> findAllNotices() {
         return noticeService.findAllNotices();
     }
 
     /*
         공지사항 선택 반환 Controller
      */
-    @GetMapping("/notice/getNotice/{notice_id}")
-    public NoticeListResponseDto findById(@PathVariable("notice_id") int notice_id) {
+    @GetMapping("/notice/{notice_id}")
+    public ReturnNoticeResponseDto findById(@PathVariable("notice_id") int notice_id) {
         return noticeService.findById(notice_id);
     }
 

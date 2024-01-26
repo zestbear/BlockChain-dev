@@ -14,8 +14,8 @@ public interface QnaMapper {
 
     void deleteQna(QnaDeleteRequestDto dto);
 
-    List<QnaListResponseDto> findAllQnas();
+    List<ReturnQnaResponseDto> findAllQnas();
 
-    QnaListResponseDto findById(int qna_id);
+    ReturnQnaResponseDto findById(int qna_id);
 
 }

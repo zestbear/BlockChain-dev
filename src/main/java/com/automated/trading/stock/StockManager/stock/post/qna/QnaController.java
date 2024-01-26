@@ -1,7 +1,7 @@
 package com.automated.trading.stock.StockManager.stock.post.qna;
 
 import com.automated.trading.stock.StockManager.stock.post.qna.dto.QnaDeleteRequestDto;
-import com.automated.trading.stock.StockManager.stock.post.qna.dto.QnaListResponseDto;
+import com.automated.trading.stock.StockManager.stock.post.qna.dto.ReturnQnaResponseDto;
 import com.automated.trading.stock.StockManager.stock.post.qna.dto.QnaSaveRequestDto;
 import com.automated.trading.stock.StockManager.stock.post.qna.dto.QnaUpdateRequestDto;
 import org.springframework.http.HttpStatus;
@@ -83,16 +83,16 @@ public class QnaController {
     /*
         Q&A 모두 반환 Controller
      */
-    @GetMapping("/qna/getAll")
-    public List<QnaListResponseDto> findAllQnas() {
+    @GetMapping("/qna")
+    public List<ReturnQnaResponseDto> findAllQnas() {
         return qnaService.findAllQnas();
     }
 
     /*
         Q&A 선택 반환 Controller
      */
-    @GetMapping("/qna/getQna/{qna_id}")
-    public QnaListResponseDto findById(@PathVariable("qna_id") int qna_id) {
+    @GetMapping("/qna/{qna_id}")
+    public ReturnQnaResponseDto findById(@PathVariable("qna_id") int qna_id) {
         return qnaService.findById(qna_id);
     }
 
