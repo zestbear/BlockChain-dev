@@ -19,6 +19,11 @@ public class QnaController {
         this.qnaService = qnaService;
     }
 
+    /*
+        Q&A 저장 Controller
+
+        성공: Qna saved successfully
+     */
     @PostMapping("/qna/save/{member_id}")
     public ResponseEntity<String> saveQna(@PathVariable("member_id") int member_id,
                                              @RequestBody QnaSaveRequestDto dto) {
@@ -33,6 +38,11 @@ public class QnaController {
         return ResponseEntity.ok("Qna saved successfully");
     }
 
+    /*
+        Q&A 수정 Controller
+
+        성공: Qna updated successfully
+     */
     @PutMapping("/qna/update/{member_id}/{post_fk}")
     public ResponseEntity<String> updateQna(@PathVariable("member_id") int member_id,
                                                @PathVariable("post_fk") int post_fk,
@@ -49,9 +59,14 @@ public class QnaController {
         return ResponseEntity.ok("Qna updated successfully");
     }
 
+    /*
+        Q&A 삭제 Controller
+
+        성공: Qna deleted successfully
+     */
     @DeleteMapping("/qna/delete/{member_id}/{post_fk}")
     public ResponseEntity<String> deleteQna(@PathVariable("member_id") int member_id,
-                                               @PathVariable("post_fk") int post_fk) {
+                                            @PathVariable("post_fk") int post_fk) {
         QnaDeleteRequestDto dto = new QnaDeleteRequestDto();
         dto.setMember_id(member_id);
         dto.setPost_fk(post_fk);
@@ -65,11 +80,17 @@ public class QnaController {
         return ResponseEntity.ok("Qna deleted successfully");
     }
 
+    /*
+        Q&A 모두 반환 Controller
+     */
     @GetMapping("/qna/getAll")
     public List<QnaListResponseDto> findAllQnas() {
         return qnaService.findAllQnas();
     }
 
+    /*
+        Q&A 선택 반환 Controller
+     */
     @GetMapping("/qna/getQna/{qna_id}")
     public QnaListResponseDto findById(@PathVariable("qna_id") int qna_id) {
         return qnaService.findById(qna_id);
