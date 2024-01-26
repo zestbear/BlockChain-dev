@@ -11,6 +11,7 @@ public class BlockDto {
     private String hash;
     private String previous_hash;
     private String time_stamp;
+    private Boolean is_last;
     private int member_id;
 
 }
