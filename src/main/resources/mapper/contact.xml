@@ -21,10 +21,10 @@
         VALUES (#{request_title}, #{request_content}, current_timestamp);
     </insert>
 
-    <update id="respondContact" parameterType="com.automated.trading.stock.StockManager.stock.contact.dto.ContactSetStateRequestDto">
-        UPDATE stockdb.public.contact
-        SET
---         TODO: 각 상황에 맞는 멘트 정하기
-    </update>
+<!--    <update id="respondContact" parameterType="com.automated.trading.stock.StockManager.stock.contact.dto.ContactSetStateRequestDto">-->
+<!--        UPDATE stockdb.public.contact-->
+<!--        SET-->
+<!--&#45;&#45;         TODO: 각 상황에 맞는 멘트 정하기-->
+<!--    </update>-->
 
 </mapper>
