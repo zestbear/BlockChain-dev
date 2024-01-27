@@ -27,7 +27,7 @@ public class ContactController {
         return null;
     }
 
-    @GetMapping("/contact/{contact_id")
+    @GetMapping("/contact/{contact_id}")
     public ReturnContactResponseDto findById(@PathVariable("contact_id") int contact_id) {
         return contactService.findById(contact_id);
     }
