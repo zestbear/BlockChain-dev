@@ -18,4 +18,6 @@ public interface ContactMapper {
 
     ReturnContactResponseDto findById(int contact_id);
 
+    int countContacts();
+
 }
