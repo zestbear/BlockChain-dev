@@ -8,6 +8,8 @@ import lombok.Setter;
 @Setter
 public class ContactDto {
 
+    private int contact_id;
+
     // Contact 문의
     private String request_title;
     private String request_content;
