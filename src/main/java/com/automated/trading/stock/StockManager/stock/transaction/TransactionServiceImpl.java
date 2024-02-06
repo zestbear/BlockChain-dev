@@ -1,5 +1,6 @@
 package com.automated.trading.stock.StockManager.stock.transaction;
 
+import com.automated.trading.stock.StockManager.util.mapper.TransactionMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -8,12 +9,6 @@ import java.util.List;
 @Service
 @Transactional
 public class TransactionServiceImpl implements TransactionService {
-
-    private final TransactionMapper transactionMapper;
-
-    public TransactionServiceImpl(TransactionMapper transactionMapper) {
-        this.transactionMapper = transactionMapper;
-    }
 
     @Override
     public void transactionOccurred(TransactionDto dto) {

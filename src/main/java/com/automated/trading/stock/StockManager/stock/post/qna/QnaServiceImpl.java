@@ -1,6 +1,7 @@
 package com.automated.trading.stock.StockManager.stock.post.qna;
 
 import com.automated.trading.stock.StockManager.stock.post.qna.dto.*;
+import com.automated.trading.stock.StockManager.util.mapper.QnaMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,12 +10,6 @@ import java.util.List;
 @Service
 @Transactional
 public class QnaServiceImpl implements QnaService {
-
-    private final QnaMapper qnaMapper;
-
-    public QnaServiceImpl(QnaMapper qnaMapper) {
-        this.qnaMapper = qnaMapper;
-    }
 
     @Override
     public void saveQna(QnaSaveRequestDto dto) {

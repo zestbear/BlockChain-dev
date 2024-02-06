@@ -1,35 +1,35 @@
-<!-- block.xml -->
+<!--&lt;!&ndash; block.xml &ndash;&gt;-->
 
-<!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--<!DOCTYPE mapper-->
+<!--        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"-->
+<!--        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
 
-<mapper namespace="com.automated.trading.stock.StockManager.stock.block.BlockMapper">
+<!--<mapper namespace="com.automated.trading.stock.StockManager.util.mapper.BlockMapper">-->
 
-    <resultMap id="BlockResultMap" type="com.automated.trading.stock.StockManager.stock.block.dto.ReturnBlockResponseDto">
-        <id property="block_id" column="block_id" />
-        <result property="hash" column="hash" />
-        <result property="previous_hash" column="previous_hash" />
-        <result property="time_stamp" column="time_stamp" />
-        <result property="is_last" column="is_last" />
-        <result property="member_id" column="member_id" />
-    </resultMap>
-    
-    <insert id="createBlock" parameterType="com.automated.trading.stock.StockManager.stock.block.dto.BlockSaveRequestDto">
-        UPDATE stockdb.public.block
-        SET is_last = false
-        WHERE is_last = true;
-        INSERT INTO stockdb.public.block (hash, previous_hash, time_stamp, member_id)
-        VALUES (#{hash}, #{previous_hash}, current_timestamp, #{member_id});
-    </insert>
+<!--    <resultMap id="BlockResultMap" type="com.automated.trading.stock.StockManager.stock.block.dto.ReturnBlockResponseDto">-->
+<!--        <id property="block_id" column="block_id" />-->
+<!--        <result property="hash" column="hash" />-->
+<!--        <result property="previous_hash" column="previous_hash" />-->
+<!--        <result property="time_stamp" column="time_stamp" />-->
+<!--        <result property="is_last" column="is_last" />-->
+<!--        <result property="member_id" column="member_id" />-->
+<!--    </resultMap>-->
+<!--    -->
+<!--    <insert id="createBlock" parameterType="com.automated.trading.stock.StockManager.stock.block.dto.BlockSaveRequestDto">-->
+<!--        UPDATE stockdb.public.block-->
+<!--        SET is_last = false-->
+<!--        WHERE is_last = true;-->
+<!--        INSERT INTO stockdb.public.block (hash, previous_hash, time_stamp, member_id)-->
+<!--        VALUES (#{hash}, #{previous_hash}, current_timestamp, #{member_id});-->
+<!--    </insert>-->
 
-    <select id="getLastHash" resultType="String">
-        SELECT hash FROM stockdb.public.block
-        WHERE is_last = true;
-    </select>
+<!--    <select id="getLastHash" resultType="String">-->
+<!--        SELECT hash FROM stockdb.public.block-->
+<!--        WHERE is_last = true;-->
+<!--    </select>-->
 
-    <select id="countBlocks" resultType="int">
-        SELECT COUNT(*) FROM stockdb.public.block;
-    </select>
+<!--    <select id="countBlocks" resultType="int">-->
+<!--        SELECT COUNT(*) FROM stockdb.public.block;-->
+<!--    </select>-->
 
-</mapper>
+<!--</mapper>-->

@@ -4,6 +4,7 @@ import com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeDele
 import com.automated.trading.stock.StockManager.stock.post.notice.dto.ReturnNoticeResponseDto;
 import com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeSaveRequestDto;
 import com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeUpdateRequestDto;
+import com.automated.trading.stock.StockManager.util.mapper.NoticeMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,12 +13,6 @@ import java.util.List;
 @Service
 @Transactional
 public class NoticeServiceImpl implements NoticeService {
-
-    private final NoticeMapper noticeMapper;
-
-    public NoticeServiceImpl(NoticeMapper noticeMapper) {
-        this.noticeMapper = noticeMapper;
-    }
 
     @Override
     public void saveNotice(NoticeSaveRequestDto dto) {
