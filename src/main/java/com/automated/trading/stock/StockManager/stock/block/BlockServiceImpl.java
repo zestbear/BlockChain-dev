@@ -4,6 +4,7 @@ import com.automated.trading.stock.StockManager.stock.block.dto.BlockSaveRequest
 import com.automated.trading.stock.StockManager.stock.block.dto.BlockUpdateRequestDto;
 import com.automated.trading.stock.StockManager.stock.block.dto.GenerateHashDto;
 import com.automated.trading.stock.StockManager.stock.block.dto.ReturnBlockResponseDto;
+import com.automated.trading.stock.StockManager.util.mapper.BlockMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,12 +15,6 @@ import java.time.LocalDateTime;
 @Service
 @Transactional
 public class BlockServiceImpl implements BlockService {
-
-    private final BlockMapper blockMapper;
-
-    public BlockServiceImpl(BlockMapper blockMapper) {
-        this.blockMapper = blockMapper;
-    }
 
     /*
         새로 생성되는 Block의 Hash 생성

@@ -3,6 +3,7 @@ package com.automated.trading.stock.StockManager.stock.contact;
 import com.automated.trading.stock.StockManager.stock.contact.dto.ContactSendRequestDto;
 import com.automated.trading.stock.StockManager.stock.contact.dto.ContactSetStateRequestDto;
 import com.automated.trading.stock.StockManager.stock.contact.dto.ReturnContactResponseDto;
+import com.automated.trading.stock.StockManager.util.mapper.ContactMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,12 +12,6 @@ import java.util.List;
 @Service
 @Transactional
 public class ContactServiceImpl implements ContactService {
-
-    private final ContactMapper contactMapper;
-
-    public ContactServiceImpl(ContactMapper contactMapper) {
-        this.contactMapper = contactMapper;
-    }
 
     @Override
     public void sendContact(ContactSendRequestDto dto) {
