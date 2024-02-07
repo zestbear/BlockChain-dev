@@ -1,7 +1,8 @@
-package com.automated.trading.stock.StockManager.stock.notice.domain;
+package com.automated.trading.stock.StockManager.stock.qna.domain;
 
+import com.automated.trading.stock.StockManager.stock.comment.domain.Comment;
 import com.automated.trading.stock.StockManager.stock.member.domain.Member;
-import com.automated.trading.stock.StockManager.stock.notice.controller.dto.ReturnNoticeResponseDto;
+import com.automated.trading.stock.StockManager.stock.qna.controller.dto.ReturnQnaResponseDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -9,15 +10,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
 @NoArgsConstructor
-public class Notice {
+public class Qna {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "notice_id")
+    @Column(name = "qna_id")
     private Long id;
 
     private String title;
@@ -29,30 +32,37 @@ public class Notice {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private LocalDateTime mod_dt;
 
-    private Boolean imprtnc;
+    private Boolean secret;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member writer;
 
+    @OneToMany(mappedBy = "qna")
+    private List<Comment> commentList = new ArrayList<>();
+
     @Builder
-    public Notice(String title, String content, Boolean imprtnc, Member writer) {
+    public Qna(String title, String content, Boolean secret, Member writer) {
         this.title = title;
         this.content = content;
-        this.imprtnc = imprtnc;
+        this.secret = secret;
         this.writer = writer;
         this.wrt_dt = LocalDateTime.now();
         this.mod_dt = null;
     }
 
-    public ReturnNoticeResponseDto toEntity() {
-        return ReturnNoticeResponseDto.builder()
+    public ReturnQnaResponseDto toEntity() {
+        return ReturnQnaResponseDto.builder()
                 .title(this.title)
                 .content(this.content)
                 .wrt_dt(this.wrt_dt.toString())
                 .mod_dt(this.mod_dt.toString())
-                .imprtnc(this.imprtnc)
+                .secret(this.secret)
                 .build();
+    }
+
+    public void addComment(Comment comment) {
+        this.commentList.add(comment);
     }
 
 }

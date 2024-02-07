@@ -14,6 +14,7 @@ public enum ApiResponseType {
     /* 게시물 관련 Error */
     PostWriter_ERROR(104, "해당 게시물의 작성자가 아닙니다."),
     PostNotExist_ERROR(105, "해당 게시물이 존재하지 않습니다."),
+    NullTextField_ERROR(106, "입력 텍스트박스가 null 입니다."),
 
     BAD_REQUEST(201,"불가능한 요청입니다."),
     ERROR(500, "에러가 발생했습니다.");

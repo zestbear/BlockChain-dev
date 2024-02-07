@@ -8,6 +8,7 @@ import com.automated.trading.stock.StockManager.stock.notice.controller.dto.Noti
 import com.automated.trading.stock.StockManager.stock.notice.domain.Notice;
 import com.automated.trading.stock.StockManager.stock.notice.domain.NoticeRepository;
 import com.automated.trading.stock.StockManager.util.exception.MemberNotExistException;
+import com.automated.trading.stock.StockManager.util.exception.NullTextFieldException;
 import com.automated.trading.stock.StockManager.util.exception.PostNotExistException;
 import com.automated.trading.stock.StockManager.util.exception.PostWriterNotMatchException;
 import org.springframework.data.domain.PageRequest;
@@ -40,12 +41,19 @@ public class NoticeServiceImpl implements NoticeService {
         Member findMember = memberRepository.findById(writer)
                 .orElseThrow(MemberNotExistException::new);
 
-        noticeRepository.save(Notice.builder()
+        if (dto.getTitle().isEmpty() || dto.getContent().isEmpty()) {
+            throw new NullTextFieldException();
+        }
+
+        Notice notice = Notice.builder()
                 .title(dto.getTitle())
                 .content(dto.getContent())
                 .writer(findMember)
                 .imprtnc(dto.getImprtnc())
-                .build());
+                .build();
+
+        noticeRepository.save(notice);
+        findMember.addNotice(notice);
     }
 
     /**
@@ -60,6 +68,11 @@ public class NoticeServiceImpl implements NoticeService {
         LocalDateTime now = LocalDateTime.now();
         Notice notice = noticeRepository.findById(post_fk)
                 .orElseThrow(PostNotExistException::new);
+
+        if (dto.getTitle().isEmpty() || dto.getContent().isEmpty()) {
+            throw new NullTextFieldException();
+        }
+
         String newTitle;
         String newContent;
         if (notice.getWriter().getId().equals(writer)) {

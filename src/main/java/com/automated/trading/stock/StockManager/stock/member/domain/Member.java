@@ -1,6 +1,7 @@
 package com.automated.trading.stock.StockManager.stock.member.domain;
 
 import com.automated.trading.stock.StockManager.stock.notice.domain.Notice;
+import com.automated.trading.stock.StockManager.stock.qna.domain.Qna;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -33,6 +34,9 @@ public class Member {
     @OneToMany(mappedBy = "writer")
     private List<Notice> noticeList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "writer")
+    private List<Qna> qnaList = new ArrayList<>();
+
     @Builder
     public Member(String name, String email, String picture) {
         this.name = name;
@@ -42,8 +46,12 @@ public class Member {
         this.created_dt = LocalDateTime.now();
     }
 
-    public void saveNotice(Notice notice) {
+    public void addNotice(Notice notice) {
         this.noticeList.add(notice);
+    }
+
+    public void addQna(Qna qna) {
+        this.qnaList.add(qna);
     }
 
 }
