@@ -60,8 +60,8 @@ public class QnaController {
      */
     @PutMapping("/qna/update/{member_id}/{post_id}")
     public ApiResponse<String> updateQna(@PathVariable("member_id") Long writer,
-                                            @PathVariable("post_id") Long post_id,
-                                            @RequestBody QnaUpdateRequestDto dto) {
+                                         @PathVariable("post_id") Long post_id,
+                                         @RequestBody QnaUpdateRequestDto dto) {
         try {
             qnaService.updateQna(writer, post_id, dto);
         } catch (NullTextFieldException nullTextFieldException) {
