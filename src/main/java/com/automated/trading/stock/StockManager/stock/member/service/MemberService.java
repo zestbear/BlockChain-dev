@@ -4,6 +4,6 @@ import com.automated.trading.stock.StockManager.stock.member.controller.MemberJo
 
 public interface MemberService {
 
-    public void join(MemberJoinRequestDto dto);
+    void join(MemberJoinRequestDto dto);
 
 }

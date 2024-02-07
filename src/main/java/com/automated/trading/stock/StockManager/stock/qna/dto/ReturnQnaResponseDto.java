@@ -1,6 +1,5 @@
-package com.automated.trading.stock.StockManager.stock.post.qna.dto;
+package com.automated.trading.stock.StockManager.stock.qna.dto;
 
-import com.automated.trading.stock.StockManager.stock.post.PostType;
 import lombok.Getter;
 import lombok.Setter;
 

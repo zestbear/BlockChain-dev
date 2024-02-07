@@ -1,9 +1,9 @@
-package com.automated.trading.stock.StockManager.stock.post.qna;
+package com.automated.trading.stock.StockManager.stock.qna;
 
-import com.automated.trading.stock.StockManager.stock.post.qna.dto.QnaDeleteRequestDto;
-import com.automated.trading.stock.StockManager.stock.post.qna.dto.ReturnQnaResponseDto;
-import com.automated.trading.stock.StockManager.stock.post.qna.dto.QnaSaveRequestDto;
-import com.automated.trading.stock.StockManager.stock.post.qna.dto.QnaUpdateRequestDto;
+import com.automated.trading.stock.StockManager.stock.qna.dto.QnaDeleteRequestDto;
+import com.automated.trading.stock.StockManager.stock.qna.dto.ReturnQnaResponseDto;
+import com.automated.trading.stock.StockManager.stock.qna.dto.QnaSaveRequestDto;
+import com.automated.trading.stock.StockManager.stock.qna.dto.QnaUpdateRequestDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

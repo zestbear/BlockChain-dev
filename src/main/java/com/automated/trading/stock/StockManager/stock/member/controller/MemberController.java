@@ -17,6 +17,9 @@ public class MemberController {
         this.memberService = memberService;
     }
 
+    /**
+     * 앱 내 최초 로그인 및 회원가입
+     */
     @PostMapping("/join")
     public ApiResponse<String> join(@RequestBody MemberJoinRequestDto dto) {
 

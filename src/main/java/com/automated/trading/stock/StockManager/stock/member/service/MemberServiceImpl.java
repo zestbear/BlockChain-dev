@@ -18,7 +18,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     /**
-     * [ 사용자 저장 API ]
+     * 사용자 저장
      * - 이미 존재하는 "email" 이라면 DuplicatedEmail_ERROR 발생
      * - 중복 "email" 이 존재하지 않는다면 database 저장
      */
