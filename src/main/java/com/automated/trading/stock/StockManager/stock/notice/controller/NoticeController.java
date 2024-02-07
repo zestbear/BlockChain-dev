@@ -85,7 +85,7 @@ public class NoticeController {
     }
 
     /**
-     * 공지사항 모두 반환ㄱ
+     * 공지사항 모두 반환
      * - 페이징 완료
      */
     @GetMapping("/notice")
