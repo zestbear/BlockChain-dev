@@ -4,13 +4,11 @@ import com.automated.trading.stock.StockManager.stock.block.dto.BlockSaveRequest
 import com.automated.trading.stock.StockManager.stock.block.dto.BlockUpdateRequestDto;
 import com.automated.trading.stock.StockManager.stock.block.dto.GenerateHashDto;
 import com.automated.trading.stock.StockManager.stock.block.dto.ReturnBlockResponseDto;
-import com.automated.trading.stock.StockManager.util.mapper.BlockMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.time.LocalDateTime;
 
 @Service
 @Transactional
@@ -47,29 +45,28 @@ public class BlockServiceImpl implements BlockService {
      */
     @Override
     public void createBlock(BlockSaveRequestDto dto) {
-
-        // 현재 시간
-        LocalDateTime localDateTime;
-        localDateTime = LocalDateTime.now();
-        dto.setTime_stamp(localDateTime.toString());
-
-        // previous hash
-        String previous_hash = blockMapper.getLastHash();
-        dto.setPrevious_hash(previous_hash);
-
-        // data
-        String data = "data"; // 추후 변경 예정
-
-        // hash
-        String hash = generateHash(new GenerateHashDto(previous_hash, data, localDateTime.toString()));
-        dto.setHash(hash);
-
-        blockMapper.createBlock(dto);
+//
+//        // 현재 시간
+//        LocalDateTime localDateTime;
+//        localDateTime = LocalDateTime.now();
+//        dto.setTime_stamp(localDateTime.toString());
+//
+//        // previous hash
+//        String previous_hash = blockMapper.getLastHash();
+//        dto.setPrevious_hash(previous_hash);
+//
+//        // data
+//        String data = "data"; // 추후 변경 예정
+//
+//        // hash
+//        String hash = generateHash(new GenerateHashDto(previous_hash, data, localDateTime.toString()));
+//        dto.setHash(hash);
+//
+//        blockMapper.createBlock(dto);
     }
 
     @Override
     public void updateBlock(BlockUpdateRequestDto dto) {
-        blockMapper.updateBlock(dto);
     }
 
     /*
@@ -80,17 +77,16 @@ public class BlockServiceImpl implements BlockService {
      */
     @Override
     public void deleteBlock(int block_id) {
-        blockMapper.deleteBlock(block_id);
     }
 
     @Override
     public synchronized ReturnBlockResponseDto findByHash(String hash) {
-        return blockMapper.findByHash(hash);
+        return null;
     }
 
     @Override
     public synchronized ReturnBlockResponseDto findByPreviousHash(String previous_hash) {
-        return blockMapper.findByPreviousHash(previous_hash);
+        return null;
     }
 
 
