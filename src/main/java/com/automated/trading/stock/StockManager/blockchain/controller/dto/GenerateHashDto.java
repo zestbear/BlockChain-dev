@@ -1,4 +1,4 @@
-package com.automated.trading.stock.StockManager.blockchain.block.controller.dto;
+package com.automated.trading.stock.StockManager.blockchain.controller.dto;
 
 import lombok.Builder;
 import lombok.Getter;

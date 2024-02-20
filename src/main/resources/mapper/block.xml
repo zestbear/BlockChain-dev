@@ -6,7 +6,7 @@
 
 <!--<mapper namespace="com.automated.trading.stock.StockManager.util.mapper.BlockMapper">-->
 
-<!--    <resultMap id="BlockResultMap" type="com.automated.trading.stock.StockManager.func.block.dto.ReturnBlockResponseDto">-->
+<!--    <resultMap id="BlockResultMap" type="com.automated.trading.stock.StockManager.func.block.dto.ReturnBlockChainResponseDto">-->
 <!--        <id property="block_id" column="block_id" />-->
 <!--        <result property="hash" column="hash" />-->
 <!--        <result property="previous_hash" column="previous_hash" />-->

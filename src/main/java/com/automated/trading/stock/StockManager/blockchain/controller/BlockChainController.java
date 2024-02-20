@@ -1,6 +1,6 @@
-package com.automated.trading.stock.StockManager.blockchain.block.controller;
+package com.automated.trading.stock.StockManager.blockchain.controller;
 
-import com.automated.trading.stock.StockManager.blockchain.block.service.BlockService;
+import com.automated.trading.stock.StockManager.blockchain.service.BlockChainService;
 import com.automated.trading.stock.StockManager.util.api.ApiResponse;
 import com.automated.trading.stock.StockManager.util.api.ApiResponseType;
 import lombok.extern.slf4j.Slf4j;
@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-public class BlockController {
+public class BlockChainController {
 
-    private final BlockService blockService;
+    private final BlockChainService blockChainService;
 
-    public BlockController(BlockService blockService) {
-        this.blockService = blockService;
+    public BlockChainController(BlockChainService blockChainService) {
+        this.blockChainService = blockChainService;
     }
 
     /**
@@ -26,7 +26,7 @@ public class BlockController {
     @PostMapping("/block/{member_id}")
     public ApiResponse<String> createBlock(@PathVariable("member_id") int member_id) {
         try {
-            blockService.createBlock(member_id);
+            blockChainService.createBlock(member_id);
         } catch (Exception e) {
             log.error(ApiResponseType.BAD_REQUEST.getMessage());
             return new ApiResponse<>(ApiResponseType.BAD_REQUEST);

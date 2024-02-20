@@ -1,11 +1,11 @@
-package com.automated.trading.stock.StockManager.blockchain.block.controller.dto;
+package com.automated.trading.stock.StockManager.blockchain.controller.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class ReturnBlockResponseDto {
+public class ReturnBlockChainResponseDto {
 
     private int block_id;
     private String hash;
