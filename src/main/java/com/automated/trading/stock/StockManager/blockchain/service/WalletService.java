@@ -1,4 +1,4 @@
-package com.automated.trading.stock.StockManager.blockchain.wallet;
+package com.automated.trading.stock.StockManager.blockchain.service;
 
 public interface WalletService {
 

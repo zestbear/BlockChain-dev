@@ -1,4 +1,4 @@
-package com.automated.trading.stock.StockManager.blockchain.wallet;
+package com.automated.trading.stock.StockManager.blockchain.service;
 
 import com.automated.trading.stock.StockManager.util.secrets.CrypticSecurity;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
@@ -11,6 +11,13 @@ import java.security.spec.ECGenParameterSpec;
 @Service
 @Transactional
 public class WalletServiceImpl implements WalletService {
+
+    /**
+     * Wallet
+     * - 개인키, 공개키 저장
+     * - Transaction 생성
+     * - Transaction 저장 (-> Data)
+     */
 
     static {
         Security.addProvider(new BouncyCastleProvider());

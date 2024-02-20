@@ -2,7 +2,7 @@
 //
 //import com.automated.trading.stock.StockManager.stock.block.dto.BlockSaveRequestDto;
 //import com.automated.trading.stock.StockManager.stock.block.dto.BlockUpdateRequestDto;
-//import com.automated.trading.stock.StockManager.stock.block.dto.ReturnBlockResponseDto;
+//import com.automated.trading.stock.StockManager.stock.block.dto.ReturnBlockChainResponseDto;
 //import org.apache.ibatis.annotations.Mapper;
 //
 //@Mapper
@@ -14,9 +14,9 @@
 //
 //    void deleteBlock(int block_id);
 //
-//    ReturnBlockResponseDto findByHash(String hash);
+//    ReturnBlockChainResponseDto findByHash(String hash);
 //
-//    ReturnBlockResponseDto findByPreviousHash(String previous_hash);
+//    ReturnBlockChainResponseDto findByPreviousHash(String previous_hash);
 //
 //    int countBlocks();
 //
