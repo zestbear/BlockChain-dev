@@ -1,6 +1,7 @@
-package com.automated.trading.stock.StockManager.blockchain.block.service;
+package com.automated.trading.stock.StockManager.blockchain.service;
 
-import com.automated.trading.stock.StockManager.blockchain.block.controller.dto.GenerateHashDto;
+import com.automated.trading.stock.StockManager.blockchain.controller.dto.GenerateHashDto;
+import com.automated.trading.stock.StockManager.blockchain.domain.Data;
 import lombok.Getter;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
@@ -9,42 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 @Service
 @Transactional
-public class BlockServiceImpl implements BlockService {
-
-    /**
-     * Transaction 정의 class
-     */
-    class Transaction {
-        String sender_key;
-        String receiver_key;
-        int count;
-        @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-        LocalDateTime tran_at;
-//        String transaction_input;
-//        String transaction_output;
-//        String signature;
-
-        public Transaction(String sender_key, String receiver_key, int count) {
-            this.sender_key = sender_key;
-            this.receiver_key = receiver_key;
-            this.count = count;
-            this.tran_at = LocalDateTime.now();
-        }
-    }
-
-    /**
-     * Data 정의 class
-     */
-    class Data {
-        int member_id;
-        List<Transaction> transactions = new ArrayList<>();
-    }
+public class BlockChainServiceImpl implements BlockChainService {
 
     /**
      * Block 정의 class
@@ -112,12 +82,13 @@ public class BlockServiceImpl implements BlockService {
         }
 
         // data
-//        Data newData = new Data(member_id, hash)
+        Data newData = new Data(member_id);
+        String data = newData.toString();
 
         // hash
-//        String hash = generateHash(new GenerateHashDto(previous_hash, data, dateTime.toString()));
-//
-//        blockChain.add(new Block(hash, previous_hash, member_id));
+        String hash = generateHash(new GenerateHashDto(previous_hash, data, dateTime.toString()));
+
+        blockChain.add(new Block(hash, previous_hash, member_id, newData));
     }
 
     /**
