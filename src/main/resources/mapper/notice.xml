@@ -6,7 +6,7 @@
 
 <!--<mapper namespace="com.automated.trading.stock.StockManager.util.mapper.NoticeMapper">-->
 
-<!--    <resultMap id="NoticeResultMap" type="com.automated.trading.stock.StockManager.stock.post.notice.dto.ReturnNoticeResponseDto">-->
+<!--    <resultMap id="NoticeResultMap" type="com.automated.trading.stock.StockManager.func.post.notice.dto.ReturnNoticeResponseDto">-->
 <!--        <id property="post_fk" column="post_fk" />-->
 <!--        <result property="title" column="title" />-->
 <!--        <result property="content" column="content" />-->
@@ -17,14 +17,14 @@
 <!--        <result property="member_id" column="member_id" />-->
 <!--    </resultMap>-->
 
-<!--    <insert id="saveNotice" parameterType="com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeSaveRequestDto">-->
+<!--    <insert id="saveNotice" parameterType="com.automated.trading.stock.StockManager.func.post.notice.dto.NoticeSaveRequestDto">-->
 <!--        INSERT INTO stockdb.public.post (title, content, wrt_dt, member_id, post_type)-->
 <!--        VALUES (#{title}, #{content}, current_timestamp, #{member_id}, 'notice');-->
 <!--        INSERT INTO stockdb.public.notice (post_fk, imprtnc)-->
 <!--        VALUES (currval('post_post_id_seq'), #{imprtnc});-->
 <!--    </insert>-->
 
-<!--    <update id="updateNotice" parameterType="com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeUpdateRequestDto">-->
+<!--    <update id="updateNotice" parameterType="com.automated.trading.stock.StockManager.func.post.notice.dto.NoticeUpdateRequestDto">-->
 <!--        UPDATE stockdb.public.post-->
 <!--        SET-->
 <!--        <if test="title != null and title != ''">-->
@@ -37,7 +37,7 @@
 <!--        WHERE post_id = #{post_fk} and member_id = #{member_id};-->
 <!--    </update>-->
 
-<!--    <delete id="deleteNotice" parameterType="com.automated.trading.stock.StockManager.stock.post.notice.dto.NoticeDeleteRequestDto">-->
+<!--    <delete id="deleteNotice" parameterType="com.automated.trading.stock.StockManager.func.post.notice.dto.NoticeDeleteRequestDto">-->
 <!--        DELETE FROM stockdb.public.notice-->
 <!--        WHERE post_fk = #{post_fk};-->
 <!--        DELETE FROM stockdb.public.post-->

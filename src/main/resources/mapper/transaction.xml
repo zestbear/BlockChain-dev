@@ -17,7 +17,7 @@
 <!--        <result property="data_id" column="data_id" />-->
 <!--    </resultMap>-->
 
-<!--    <insert id="transactionOccurred" parameterType="com.automated.trading.stock.StockManager.stock.transaction.TransactionDto">-->
+<!--    <insert id="transactionOccurred" parameterType="com.automated.trading.stock.StockManager.func.transaction.TransactionDto">-->
 <!--        INSERT INTO stockdb.public.transaction (sender_key, receiver_key, count, transaction_input, transaction_output, tran_dt, data_id)-->
 <!--        VALUES (#{sender_key}, #{receiver_key}, #{count}, #{transaction_input}, #{transaction_output}, current_timestamp, #{data_id});-->
 <!--    </insert>-->

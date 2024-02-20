@@ -4,7 +4,7 @@
 
 <!--<mapper namespace="com.automated.trading.stock.StockManager.util.mapper.QnaMapper">-->
 
-<!--    <resultMap id="QnaResultMap" type="dto.com.automated.trading.stock.StockManager.stock.qna.ReturnQnaResponseDto">-->
+<!--    <resultMap id="QnaResultMap" type="dto.com.automated.trading.stock.StockManager.func.qna.ReturnQnaResponseDto">-->
 <!--        <id property="post_fk" column="post_fk" />-->
 <!--        <result property="title" column="title" />-->
 <!--        <result property="content" column="content" />-->
@@ -15,14 +15,14 @@
 <!--        <result property="member_id" column="member_id" />-->
 <!--    </resultMap>-->
 
-<!--    <insert id="saveQna" parameterType="dto.com.automated.trading.stock.StockManager.stock.qna.QnaSaveRequestDto">-->
+<!--    <insert id="saveQna" parameterType="dto.com.automated.trading.stock.StockManager.func.qna.QnaSaveRequestDto">-->
 <!--        INSERT INTO stockdb.public.post (title, content, post_type, wrt_dt, member_id)-->
 <!--        VALUES (#{title}, #{content}, 'qna', current_timestamp, #{member_id});-->
 <!--        INSERT INTO stockdb.public.qna (post_fk, secret)-->
 <!--        VALUES (currval('post_post_id_seq'), #{secret});-->
 <!--    </insert>-->
 
-<!--    <update id="updateQna" parameterType="dto.com.automated.trading.stock.StockManager.stock.qna.QnaUpdateRequestDto">-->
+<!--    <update id="updateQna" parameterType="dto.com.automated.trading.stock.StockManager.func.qna.QnaUpdateRequestDto">-->
 <!--        UPDATE stockdb.public.post-->
 <!--        SET-->
 <!--        <if test="title != null and title != ''">-->
@@ -35,7 +35,7 @@
 <!--        WHERE post_id = #{post_fk} and member_id = #{member_id};-->
 <!--    </update>-->
 
-<!--    <delete id="deleteQna" parameterType="dto.com.automated.trading.stock.StockManager.stock.qna.QnaDeleteRequestDto">-->
+<!--    <delete id="deleteQna" parameterType="dto.com.automated.trading.stock.StockManager.func.qna.QnaDeleteRequestDto">-->
 <!--        DELETE FROM stockdb.public.qna-->
 <!--        WHERE post_fk = #{post_fk};-->
 <!--        DELETE FROM stockdb.public.post-->

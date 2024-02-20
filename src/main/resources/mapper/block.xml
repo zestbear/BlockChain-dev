@@ -6,7 +6,7 @@
 
 <!--<mapper namespace="com.automated.trading.stock.StockManager.util.mapper.BlockMapper">-->
 
-<!--    <resultMap id="BlockResultMap" type="com.automated.trading.stock.StockManager.stock.block.dto.ReturnBlockResponseDto">-->
+<!--    <resultMap id="BlockResultMap" type="com.automated.trading.stock.StockManager.func.block.dto.ReturnBlockResponseDto">-->
 <!--        <id property="block_id" column="block_id" />-->
 <!--        <result property="hash" column="hash" />-->
 <!--        <result property="previous_hash" column="previous_hash" />-->
@@ -15,7 +15,7 @@
 <!--        <result property="member_id" column="member_id" />-->
 <!--    </resultMap>-->
 <!--    -->
-<!--    <insert id="createBlock" parameterType="com.automated.trading.stock.StockManager.stock.block.dto.BlockSaveRequestDto">-->
+<!--    <insert id="createBlock" parameterType="com.automated.trading.stock.StockManager.func.block.dto.BlockSaveRequestDto">-->
 <!--        UPDATE stockdb.public.block-->
 <!--        SET is_last = false-->
 <!--        WHERE is_last = true;-->

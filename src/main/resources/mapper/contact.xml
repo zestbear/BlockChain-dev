@@ -6,7 +6,7 @@
 
 <!--<mapper namespace="com.automated.trading.stock.StockManager.util.mapper.ContactMapper">-->
 
-<!--    <resultMap id="NoticeResultMap" type="com.automated.trading.stock.StockManager.stock.contact.dto.ReturnContactResponseDto">-->
+<!--    <resultMap id="NoticeResultMap" type="com.automated.trading.stock.StockManager.func.contact.dto.ReturnContactResponseDto">-->
 <!--        <id property="contact_id" column="contact_id" />-->
 <!--        <result property="request_title" column="request_title" />-->
 <!--        <result property="request_content" column="request_content" />-->
@@ -16,12 +16,12 @@
 <!--        <result property="wrt_dt" column="wrt_dt" />-->
 <!--    </resultMap>-->
 
-<!--    <insert id="sendContact" parameterType="com.automated.trading.stock.StockManager.stock.contact.dto.ContactSendRequestDto">-->
+<!--    <insert id="sendContact" parameterType="com.automated.trading.stock.StockManager.func.contact.dto.ContactSendRequestDto">-->
 <!--        INSERT INTO stockdb.public.contact (request_title, request_content, wrt_dt)-->
 <!--        VALUES (#{request_title}, #{request_content}, current_timestamp);-->
 <!--    </insert>-->
 
-<!--&lt;!&ndash;    <update id="respondContact" parameterType="com.automated.trading.stock.StockManager.stock.contact.dto.ContactSetStateRequestDto">&ndash;&gt;-->
+<!--&lt;!&ndash;    <update id="respondContact" parameterType="com.automated.trading.stock.StockManager.func.contact.dto.ContactSetStateRequestDto">&ndash;&gt;-->
 <!--&lt;!&ndash;        UPDATE stockdb.public.contact&ndash;&gt;-->
 <!--&lt;!&ndash;        SET&ndash;&gt;-->
 <!--&lt;!&ndash;&#45;&#45;         TODO: 각 상황에 맞는 멘트 정하기&ndash;&gt;-->
