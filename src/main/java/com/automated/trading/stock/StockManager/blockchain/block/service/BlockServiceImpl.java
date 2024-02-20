@@ -1,7 +1,7 @@
 package com.automated.trading.stock.StockManager.blockchain.block.service;
 
 import com.automated.trading.stock.StockManager.blockchain.block.controller.dto.GenerateHashDto;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,25 +9,61 @@ import org.springframework.transaction.annotation.Transactional;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 @Service
 @Transactional
 public class BlockServiceImpl implements BlockService {
 
-    @NoArgsConstructor
+    /**
+     * Transaction 정의 class
+     */
+    class Transaction {
+        String sender_key;
+        String receiver_key;
+        int count;
+        @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        LocalDateTime tran_at;
+//        String transaction_input;
+//        String transaction_output;
+//        String signature;
+
+        public Transaction(String sender_key, String receiver_key, int count) {
+            this.sender_key = sender_key;
+            this.receiver_key = receiver_key;
+            this.count = count;
+            this.tran_at = LocalDateTime.now();
+        }
+    }
+
+    /**
+     * Data 정의 class
+     */
+    class Data {
+        int member_id;
+        List<Transaction> transactions = new ArrayList<>();
+    }
+
+    /**
+     * Block 정의 class
+     */
+    @Getter
     class Block {
         String hash; // 자신의 hash
         String previous_hash; // 이전 Block hash
         @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         LocalDateTime time_stamp; // Block 생성 시간
         int member_id; // Block 사용자
+        Data data;
 
-        public Block(String hash, String previous_hash, int member_id) {
+        public Block(String hash, String previous_hash, int member_id, Data data) {
             this.hash = hash;
             this.previous_hash = previous_hash;
             this.time_stamp = LocalDateTime.now();
             this.member_id = member_id;
+            this.data = data;
         }
     }
 
@@ -76,12 +112,12 @@ public class BlockServiceImpl implements BlockService {
         }
 
         // data
-        String data = "data"; // TODO: 추후 변경 예정
+//        Data newData = new Data(member_id, hash)
 
         // hash
-        String hash = generateHash(new GenerateHashDto(previous_hash, data, dateTime.toString()));
-
-        blockChain.add(new Block(hash, previous_hash, member_id));
+//        String hash = generateHash(new GenerateHashDto(previous_hash, data, dateTime.toString()));
+//
+//        blockChain.add(new Block(hash, previous_hash, member_id));
     }
 
     /**
