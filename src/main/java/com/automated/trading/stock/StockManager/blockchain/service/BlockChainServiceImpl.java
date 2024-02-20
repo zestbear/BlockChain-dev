@@ -3,6 +3,7 @@ package com.automated.trading.stock.StockManager.blockchain.service;
 import com.automated.trading.stock.StockManager.blockchain.controller.dto.GenerateHashDto;
 import com.automated.trading.stock.StockManager.blockchain.domain.Data;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,7 @@ public class BlockChainServiceImpl implements BlockChainService {
      */
     @Getter
     class Block {
+        @Setter
         String hash; // 자신의 hash
         String previous_hash; // 이전 Block hash
         @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -35,6 +37,7 @@ public class BlockChainServiceImpl implements BlockChainService {
             this.member_id = member_id;
             this.data = data;
         }
+
     }
 
     private LinkedList<Block> blockChain = new LinkedList<>();
@@ -89,6 +92,23 @@ public class BlockChainServiceImpl implements BlockChainService {
         String hash = generateHash(new GenerateHashDto(previous_hash, data, dateTime.toString()));
 
         blockChain.add(new Block(hash, previous_hash, member_id, newData));
+    }
+
+    /**
+     * Scheduled로 관리할 Hash 업데이트 메서드
+     */
+    @Override
+    public void updateHash() {
+
+        for (Block block : blockChain) {
+            String previous_hash = block.previous_hash;
+            String data = block.data.toString();
+            String time_stamp = block.time_stamp.toString();
+
+            String hash = generateHash(new GenerateHashDto(previous_hash, data, time_stamp));
+            block.setHash(hash);
+        }
+
     }
 
     /**

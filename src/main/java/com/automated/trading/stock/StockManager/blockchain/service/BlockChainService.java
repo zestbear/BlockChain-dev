@@ -8,6 +8,8 @@ public interface BlockChainService {
 
     void createBlock(int member_id);
 
+    void updateHash();
+
     void deleteBlock(int block_id);
 
 }
