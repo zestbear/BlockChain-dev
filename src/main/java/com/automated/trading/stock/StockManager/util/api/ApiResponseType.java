@@ -20,6 +20,9 @@ public enum ApiResponseType {
     NullTextField_ERROR(106, "입력 텍스트박스가 null 입니다."),
     CommentNotExist_ERROR(107, "해당 댓글이 존재하지 않습니다."),
 
+    /* Key 생성 Error */
+    KeyGeneration_ERROR(120, "Key 생성에 실패했습니다."),
+
     BAD_REQUEST(201,"불가능한 요청입니다."),
     ERROR(500, "에러가 발생했습니다.");
 

@@ -1,5 +1,6 @@
 package com.automated.trading.stock.StockManager.blockchain.service;
 
+import com.automated.trading.stock.StockManager.util.exception.KeyGenerationFailException;
 import com.automated.trading.stock.StockManager.util.secrets.CrypticSecurity;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,7 @@ import java.security.spec.ECGenParameterSpec;
 
 @Service
 @Transactional
-public class WalletServiceImpl implements WalletService {
+public class TransactionServiceImpl implements TransactionService {
 
     /**
      * Wallet
@@ -25,12 +26,12 @@ public class WalletServiceImpl implements WalletService {
 
     private final CrypticSecurity crypticSecurity;
 
-    public WalletServiceImpl(CrypticSecurity crypticSecurity) {
+    public TransactionServiceImpl(CrypticSecurity crypticSecurity) {
         this.crypticSecurity = crypticSecurity;
     }
 
-    /*
-        KeyPair (개인키, 공개키) 생성
+    /**
+     * KeyPair (개인키, 공개키) 생성
      */
     @Override
     public String[] createKeypair() {
@@ -47,13 +48,20 @@ public class WalletServiceImpl implements WalletService {
             String priKey = crypticSecurity.encrypt(pairs[0]);
             String pubKeyX = crypticSecurity.encrypt(pairs[1]);
             String pubKeyY = crypticSecurity.encrypt(pairs[2]);
-//            com.automated.trading.stock.StockManager.wallet.domain.KeyPair newPair = new com.automated.trading.stock.StockManager.wallet.domain.KeyPair(priKey, pubKeyX, pubKeyY);
-//            keyPairRepository.save(newPair);
 
-            return getStrings(keyPair);
+            String[] keys = new String[3];
+            keys[0] = pubKeyX;
+            keys[1] = pubKeyY;
+            keys[2] = priKey;
+            return keys;
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new KeyGenerationFailException();
         }
+
+    }
+
+    @Override
+    public void executeTransaction(String senderKey, String receiverKey) {
 
     }
 

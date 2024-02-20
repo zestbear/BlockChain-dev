@@ -68,6 +68,8 @@ public class BlockChainServiceImpl implements BlockChainService {
     /**
      * 처음 추가하는 노드일 경우 이전 해시가 없다.
      * 처음 추가하는 노드일 경우 previous_hash를 ""인 공백으로 넣는다.
+
+     * Hash, Data를 함께 생성
      */
     @Override
     public void createBlock(int member_id) {
