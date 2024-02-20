@@ -24,7 +24,6 @@ public class BlockServiceImpl implements BlockService {
         LocalDateTime time_stamp; // Block 생성 시간
         int member_id; // Block 사용자
 
-        @Builder
         public Block(String hash, String previous_hash, int member_id) {
             this.hash = hash;
             this.previous_hash = previous_hash;
@@ -83,12 +82,7 @@ public class BlockServiceImpl implements BlockService {
         // hash
         String hash = generateHash(new GenerateHashDto(previous_hash, data, dateTime.toString()));
 
-        Block newBlock = Block.builder()
-                .hash(hash)
-                .previous_hash(previous_hash)
-                .member_id(member_id)
-                .build();
-        blockChain.add(newBlock);
+        blockChain.add(new Block(hash, previous_hash, member_id));
     }
 
     /**
