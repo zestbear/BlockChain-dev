@@ -9,6 +9,8 @@ public class Data {
 
     @Setter
     String hash;
+    @Setter
+    Wallet wallet;
     List<Transaction> transaction_log;
 
     public Data() {

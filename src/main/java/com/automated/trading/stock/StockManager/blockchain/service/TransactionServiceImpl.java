@@ -1,5 +1,7 @@
 package com.automated.trading.stock.StockManager.blockchain.service;
 
+import com.automated.trading.stock.StockManager.blockchain.controller.dto.TransactionRequestDto;
+import com.automated.trading.stock.StockManager.blockchain.domain.Wallet;
 import com.automated.trading.stock.StockManager.util.exception.KeyGenerationFailException;
 import com.automated.trading.stock.StockManager.util.secrets.CrypticSecurity;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
@@ -8,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.security.*;
 import java.security.spec.ECGenParameterSpec;
+import java.util.HashMap;
 
 @Service
 @Transactional
@@ -61,8 +64,21 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public void executeTransaction(String senderKey, String receiverKey) {
+    public void createWallet(int member_id, String[] keys) {
 
+        Wallet wallet = new Wallet(keys[0], keys[1], keys[2], new HashMap<>());
+
+    }
+
+    @Override
+    public void executeTransaction(String senderKey, String receiverKey, TransactionRequestDto dto) {
+//        Integer sending = dto.getCount() * (-1);
+//        Wallet senderOldWallet =
+//        Wallet receiverOldWallet =
+//
+//        Integer receiving = dto.getCount();
+//        Wallet senderNewWallet =
+//        Wallet receiverNewWallet =
     }
 
     private static String[] getStrings(KeyPair keyPair) {
