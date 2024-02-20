@@ -85,12 +85,13 @@ public class BlockChainServiceImpl implements BlockChainService {
         }
 
         // data
-        Data newData = new Data(member_id);
-        String data = newData.toString();
+        Data newData = new Data();
+        String data = newData.transactionString();
 
         // hash
         String hash = generateHash(new GenerateHashDto(previous_hash, data, dateTime.toString()));
 
+        newData.setHash(hash);
         blockChain.add(new Block(hash, previous_hash, member_id, newData));
     }
 
