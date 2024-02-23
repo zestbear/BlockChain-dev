@@ -1,21 +1,36 @@
 package com.automated.trading.stock.StockManager.blockchain.service;
 
 import com.automated.trading.stock.StockManager.blockchain.controller.dto.GenerateHashDto;
+import com.automated.trading.stock.StockManager.blockchain.controller.dto.TransactionRequestDto;
 import com.automated.trading.stock.StockManager.blockchain.domain.Data;
+import com.automated.trading.stock.StockManager.blockchain.domain.Transaction;
+import com.automated.trading.stock.StockManager.blockchain.domain.Wallet;
+import com.automated.trading.stock.StockManager.util.exception.KeyGenerationFailException;
+import com.automated.trading.stock.StockManager.util.exception.TransactionCheckException;
+import com.automated.trading.stock.StockManager.util.secrets.CrypticSecurity;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.security.*;
+import java.security.spec.ECGenParameterSpec;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.LinkedList;
 
+@Slf4j
 @Service
 @Transactional
 public class BlockChainServiceImpl implements BlockChainService {
+
+    private final CrypticSecurity crypticSecurity;
+
+    public BlockChainServiceImpl(CrypticSecurity crypticSecurity) {
+        this.crypticSecurity = crypticSecurity;
+    }
 
     /**
      * Block 정의 class
@@ -95,10 +110,112 @@ public class BlockChainServiceImpl implements BlockChainService {
 
         newData.setHash(hash);
         blockChain.add(new Block(hash, previous_hash, member_id, newData));
+
+        /* Block 생성 후 자동적으로 지갑 생성 */
+        newData.setWallet(createWallet(member_id, createKeypair()));
     }
 
     /**
-     * Scheduled로 관리할 Hash 업데이트 메서드
+     * KeyPair (개인키, 공개키) 생성
+     * 공개키와 개인키는 각각 암호화되어 반환되고, 지갑 생성 메서드에서 지갑에 저장된다
+     */
+    @Override
+    public String[] createKeypair() {
+
+        try {
+            KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("ECDSA", "BC");
+            SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
+            ECGenParameterSpec ecGenParameterSpec = new ECGenParameterSpec("prime192v1");
+
+            keyPairGenerator.initialize(ecGenParameterSpec, secureRandom);
+
+            KeyPair keyPair = keyPairGenerator.generateKeyPair();
+            String[] pairs = getStrings(keyPair);
+            String priKey = crypticSecurity.encrypt(pairs[0]);
+            String pubKeyX = crypticSecurity.encrypt(pairs[1]);
+            String pubKeyY = crypticSecurity.encrypt(pairs[2]);
+
+            String[] keys = new String[3];
+            keys[0] = pubKeyX;
+            keys[1] = pubKeyY;
+            keys[2] = priKey;
+            return keys;
+        } catch (Exception e) {
+            throw new KeyGenerationFailException();
+        }
+
+    }
+
+    private static String[] getStrings(KeyPair keyPair) {
+        PrivateKey key = keyPair.getPrivate();
+
+        String parsing = key.toString();
+        parsing = parsing.replace("EC Private Key", "");
+        parsing = parsing.replaceAll(" ", "");
+        parsing = parsing.replaceAll("X:", "");
+        parsing = parsing.replaceAll("Y:", "");
+        parsing = parsing.replaceAll(":", "");
+        parsing = parsing.replaceAll("\\[", "");
+        parsing = parsing.replaceAll("]", "");
+
+        String[] parsed;
+        parsed = parsing.split("\n");
+        return parsed;
+    }
+
+    /**
+     * [ 지갑 생성 ]
+     */
+    @Override
+    public Wallet createWallet(int member_id, String[] keys) {
+        return new Wallet(keys[0], keys[1], keys[2], new HashMap<>());
+    }
+
+    /**
+     * [ 사용자 입력 공개키 본인 인증 ]
+     * 사용자의 member_id 를 이용하여 Block 을 찾고
+     * Block 의 Wallet 에 가지고 있는 사용자의 공개키와 사용자가 입력한 공개키를 비교하여 (비교하는 과정에서 암호화, 복호화 필요)
+     * 일치하면 로그에 "공개키 확인이 완료되었습니다."를,
+     * 일치하지 않으면 에러를 날리게 구현
+     */
+    @Override
+    public void checkAuthority(int member_id, String input) throws Exception {
+        for (Block block : blockChain) {
+            if (block.member_id == member_id) {
+                if (crypticSecurity.decrypt(block.data.getWallet().getPublicKey_y()).equals(input)) {
+                    log.info("공개키 확인이 완료되었습니다.");
+                }
+            }
+        }
+        throw new TransactionCheckException();
+    }
+
+    /**
+     * [ Transaction 실행 ]
+     * - Transaction 객체 생성
+     * - 생성한 객체를 senderKey와 receiverKey로 Block을 찾아 Block의 Data의 트랜젝션 기록에 저장
+     */
+    @Override
+    public void executeTransaction(String senderKey, String receiverKey, TransactionRequestDto dto) {
+        Transaction transaction = Transaction.builder()
+                .sender_key(senderKey)
+                .receiver_key(receiverKey)
+                .name(dto.getName())
+                .count(dto.getCount())
+                .build();
+
+        for (Block block : blockChain) {
+            if (senderKey.equals(block.data.getWallet().getPublicKey_y())) {
+                block.data.addTransaction(transaction);
+            }
+            if (receiverKey.equals(block.data.getWallet().getPublicKey_y())) {
+                block.data.addTransaction(transaction);
+            }
+        }
+    }
+
+    /**
+     * Transaction 발생할 때마다 실행
      */
     @Override
     public void updateHash() {

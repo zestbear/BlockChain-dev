@@ -22,6 +22,7 @@ public enum ApiResponseType {
 
     /* Key 생성 Error */
     KeyGeneration_ERROR(120, "Key 생성에 실패했습니다."),
+    TransactionCheck_ERROR(121, "입력하신 인증키가 일치하지 않습니다."),
 
     BAD_REQUEST(201,"불가능한 요청입니다."),
     ERROR(500, "에러가 발생했습니다.");
