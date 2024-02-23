@@ -1,10 +1,12 @@
 package com.automated.trading.stock.StockManager.blockchain.domain;
 
+import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class Data {
 
     @Setter
