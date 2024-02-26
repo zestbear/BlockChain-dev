@@ -2,16 +2,14 @@ package com.automated.trading.stock.StockManager.blockchain.service;
 
 import com.automated.trading.stock.StockManager.blockchain.controller.dto.GenerateHashDto;
 import com.automated.trading.stock.StockManager.blockchain.controller.dto.TransactionRequestDto;
+import com.automated.trading.stock.StockManager.blockchain.domain.Block;
 import com.automated.trading.stock.StockManager.blockchain.domain.Data;
 import com.automated.trading.stock.StockManager.blockchain.domain.Transaction;
 import com.automated.trading.stock.StockManager.blockchain.domain.Wallet;
 import com.automated.trading.stock.StockManager.util.exception.KeyGenerationFailException;
 import com.automated.trading.stock.StockManager.util.exception.TransactionCheckException;
 import com.automated.trading.stock.StockManager.util.secrets.CrypticSecurity;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,29 +28,6 @@ public class BlockChainServiceImpl implements BlockChainService {
 
     public BlockChainServiceImpl(CrypticSecurity crypticSecurity) {
         this.crypticSecurity = crypticSecurity;
-    }
-
-    /**
-     * Block 정의 class
-     */
-    @Getter
-    class Block {
-        @Setter
-        String hash; // 자신의 hash
-        String previous_hash; // 이전 Block hash
-        @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-        LocalDateTime time_stamp; // Block 생성 시간
-        int member_id; // Block 사용자
-        Data data;
-
-        public Block(String hash, String previous_hash, int member_id, Data data) {
-            this.hash = hash;
-            this.previous_hash = previous_hash;
-            this.time_stamp = LocalDateTime.now();
-            this.member_id = member_id;
-            this.data = data;
-        }
-
     }
 
     private LinkedList<Block> blockChain = new LinkedList<>();
@@ -98,7 +73,7 @@ public class BlockChainServiceImpl implements BlockChainService {
         if (blockChain.isEmpty()) {
             previous_hash = "";
         } else {
-            previous_hash = blockChain.getLast().hash;
+            previous_hash = blockChain.getLast().getHash();
         }
 
         // data
@@ -181,8 +156,8 @@ public class BlockChainServiceImpl implements BlockChainService {
     @Override
     public void checkAuthority(int member_id, String input) throws Exception {
         for (Block block : blockChain) {
-            if (block.member_id == member_id) {
-                if (crypticSecurity.decrypt(block.data.getWallet().getPublicKey()).equals(input)) {
+            if (block.getMember_id() == member_id) {
+                if (crypticSecurity.decrypt(block.getData().getWallet().getPublicKey()).equals(input)) {
                     log.info("공개키 확인이 완료되었습니다.");
                 }
             }
@@ -205,11 +180,11 @@ public class BlockChainServiceImpl implements BlockChainService {
                 .build();
 
         for (Block block : blockChain) {
-            if (senderKey.equals(block.data.getWallet().getPublicKey())) {
-                block.data.addTransaction(transaction);
+            if (senderKey.equals(block.getData().getWallet().getPublicKey())) {
+                block.getData().addTransaction(transaction);
             }
-            if (receiverKey.equals(block.data.getWallet().getPublicKey())) {
-                block.data.addTransaction(transaction);
+            if (receiverKey.equals(block.getData().getWallet().getPublicKey())) {
+                block.getData().addTransaction(transaction);
             }
         }
     }
@@ -221,9 +196,9 @@ public class BlockChainServiceImpl implements BlockChainService {
     public void updateHash() {
 
         for (Block block : blockChain) {
-            String previous_hash = block.previous_hash;
-            String data = block.data.toString();
-            String time_stamp = block.time_stamp.toString();
+            String previous_hash = block.getPrevious_hash();
+            String data = block.getData().toString();
+            String time_stamp = block.getTime_stamp().toString();
 
             String hash = generateHash(new GenerateHashDto(previous_hash, data, time_stamp));
             block.setHash(hash);

@@ -1,18 +1,20 @@
 package com.automated.trading.stock.StockManager.blockchain.domain;
 
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
+@Getter
 @NoArgsConstructor
 public class Transaction {
 
-    String sender_key;
-    String receiver_key;
-    String name;
-    int count;
+    private String sender_key;
+    private String receiver_key;
+    private String name;
+    private int count;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     LocalDateTime tran_at;
 //        String transaction_input;
