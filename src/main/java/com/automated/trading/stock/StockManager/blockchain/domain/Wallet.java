@@ -8,15 +8,13 @@ import java.util.Map;
 @Getter
 public class Wallet {
 
-    private final String publicKey_x;
-    private final String publicKey_y;
+    private final String publicKey;
     private final String privateKey;
 
     private Map<String, Integer> stock;
 
-    public Wallet(String publicKey_x, String publicKey_y, String privateKey, Map<String, Integer> stock) {
-        this.publicKey_x = publicKey_x;
-        this.publicKey_y = publicKey_y;
+    public Wallet(String publicKey, String privateKey, Map<String, Integer> stock) {
+        this.publicKey = publicKey;
         this.privateKey = privateKey;
         this.stock = new HashMap<>(stock);
     }
@@ -28,7 +26,7 @@ public class Wallet {
     public Wallet updateStock(String name, Integer count) {
         Map<String, Integer> newStock = new HashMap<>(stock);
         newStock.merge(name, count, Integer::sum);
-        return new Wallet(publicKey_x, publicKey_y, privateKey, newStock);
+        return new Wallet(publicKey, privateKey, newStock);
     }
 
 }

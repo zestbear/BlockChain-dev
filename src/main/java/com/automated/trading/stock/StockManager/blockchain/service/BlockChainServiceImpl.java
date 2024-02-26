@@ -168,7 +168,7 @@ public class BlockChainServiceImpl implements BlockChainService {
      */
     @Override
     public Wallet createWallet(int member_id, String[] keys) {
-        return new Wallet(keys[0], keys[1], keys[2], new HashMap<>());
+        return new Wallet(keys[1], keys[2], new HashMap<>());
     }
 
     /**
@@ -182,7 +182,7 @@ public class BlockChainServiceImpl implements BlockChainService {
     public void checkAuthority(int member_id, String input) throws Exception {
         for (Block block : blockChain) {
             if (block.member_id == member_id) {
-                if (crypticSecurity.decrypt(block.data.getWallet().getPublicKey_y()).equals(input)) {
+                if (crypticSecurity.decrypt(block.data.getWallet().getPublicKey()).equals(input)) {
                     log.info("공개키 확인이 완료되었습니다.");
                 }
             }
@@ -205,10 +205,10 @@ public class BlockChainServiceImpl implements BlockChainService {
                 .build();
 
         for (Block block : blockChain) {
-            if (senderKey.equals(block.data.getWallet().getPublicKey_y())) {
+            if (senderKey.equals(block.data.getWallet().getPublicKey())) {
                 block.data.addTransaction(transaction);
             }
-            if (receiverKey.equals(block.data.getWallet().getPublicKey_y())) {
+            if (receiverKey.equals(block.data.getWallet().getPublicKey())) {
                 block.data.addTransaction(transaction);
             }
         }
