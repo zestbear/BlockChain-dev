@@ -16,6 +16,6 @@ public interface BlockChainService {
     String[] createKeypair();
     Wallet createWallet(int member_id, String[] keys);
     void checkAuthority(int member_id, String input) throws Exception;
-    void executeTransaction(String senderKey, String receiverKey, TransactionRequestDto dto);
+    void executeTransaction(int member_id, String input, String senderKey, String receiverKey, TransactionRequestDto dto);
 
 }

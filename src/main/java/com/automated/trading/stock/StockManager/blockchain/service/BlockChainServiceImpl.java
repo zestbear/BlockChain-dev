@@ -157,12 +157,12 @@ public class BlockChainServiceImpl implements BlockChainService {
     public void checkAuthority(int member_id, String input) throws Exception {
         for (Block block : blockChain) {
             if (block.getMember_id() == member_id) {
-                if (crypticSecurity.decrypt(block.getData().getWallet().getPublicKey()).equals(input)) {
-                    log.info("공개키 확인이 완료되었습니다.");
+                if (!crypticSecurity.decrypt(block.getData().getWallet().getPublicKey()).equals(input)) {
+                    throw new TransactionCheckException();
                 }
             }
         }
-        throw new TransactionCheckException();
+        log.info("공개키 확인이 완료되었습니다.");
     }
 
     /**
@@ -171,21 +171,28 @@ public class BlockChainServiceImpl implements BlockChainService {
      * - 생성한 객체를 senderKey와 receiverKey로 Block을 찾아 Block의 Data의 트랜젝션 기록에 저장
      */
     @Override
-    public void executeTransaction(String senderKey, String receiverKey, TransactionRequestDto dto) {
-        Transaction transaction = Transaction.builder()
-                .sender_key(senderKey)
-                .receiver_key(receiverKey)
-                .name(dto.getName())
-                .count(dto.getCount())
-                .build();
+    public void executeTransaction(int member_id, String input, String senderKey, String receiverKey, TransactionRequestDto dto) {
+        try {
+            checkAuthority(member_id, input);
+            Transaction transaction = Transaction.builder()
+                    .sender_key(senderKey)
+                    .receiver_key(receiverKey)
+                    .name(dto.getName())
+                    .count(dto.getCount())
+                    .build();
 
-        for (Block block : blockChain) {
-            if (senderKey.equals(block.getData().getWallet().getPublicKey())) {
-                block.getData().addTransaction(transaction);
+            for (Block block : blockChain) {
+                if (senderKey.equals(block.getData().getWallet().getPublicKey())) {
+                    block.getData().addTransaction(transaction);
+                }
+                if (receiverKey.equals(block.getData().getWallet().getPublicKey())) {
+                    block.getData().addTransaction(transaction);
+                }
             }
-            if (receiverKey.equals(block.getData().getWallet().getPublicKey())) {
-                block.getData().addTransaction(transaction);
-            }
+        } catch (TransactionCheckException transactionCheckException) {
+            throw transactionCheckException;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
