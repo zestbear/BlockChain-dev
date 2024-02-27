@@ -10,10 +10,10 @@ import java.util.List;
 public class Data {
 
     @Setter
-    String hash;
+    private String hash;
     @Setter
-    Wallet wallet;
-    List<Transaction> transaction_log;
+    private Wallet wallet;
+    private List<Transaction> transaction_log;
 
     public Data() {
         this.transaction_log = new ArrayList<>();
