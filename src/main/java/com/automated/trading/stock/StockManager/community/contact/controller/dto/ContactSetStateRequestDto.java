@@ -1,6 +1,6 @@
-package com.automated.trading.stock.StockManager.community.contact.dto;
+package com.automated.trading.stock.StockManager.community.contact.controller.dto;
 
-import com.automated.trading.stock.StockManager.community.contact.ContactResponseType;
+import com.automated.trading.stock.StockManager.community.contact.domain.ContactResponseType;
 import lombok.Getter;
 import lombok.Setter;
 

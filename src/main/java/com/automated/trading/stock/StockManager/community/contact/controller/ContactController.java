@@ -1,8 +1,9 @@
-package com.automated.trading.stock.StockManager.community.contact;
+package com.automated.trading.stock.StockManager.community.contact.controller;
 
-import com.automated.trading.stock.StockManager.community.contact.dto.ContactSendRequestDto;
-import com.automated.trading.stock.StockManager.community.contact.dto.ContactSetStateRequestDto;
-import com.automated.trading.stock.StockManager.community.contact.dto.ReturnContactResponseDto;
+import com.automated.trading.stock.StockManager.community.contact.service.ContactService;
+import com.automated.trading.stock.StockManager.community.contact.controller.dto.ContactSendRequestDto;
+import com.automated.trading.stock.StockManager.community.contact.controller.dto.ContactSetStateRequestDto;
+import com.automated.trading.stock.StockManager.community.contact.controller.dto.ReturnContactResponseDto;
 import org.springframework.http.RequestEntity;
 import org.springframework.web.bind.annotation.*;
 
