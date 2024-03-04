@@ -21,7 +21,7 @@
 <!--        VALUES (#{request_title}, #{request_content}, current_timestamp);-->
 <!--    </insert>-->
 
-<!--&lt;!&ndash;    <update id="respondContact" parameterType="com.automated.trading.stock.StockManager.func.contact.dto.ContactSetStateRequestDto">&ndash;&gt;-->
+<!--&lt;!&ndash;    <update id="respondContact" parameterType="com.automated.trading.stock.StockManager.func.contact.dto.ContactHoldRequestDto">&ndash;&gt;-->
 <!--&lt;!&ndash;        UPDATE stockdb.public.contact&ndash;&gt;-->
 <!--&lt;!&ndash;        SET&ndash;&gt;-->
 <!--&lt;!&ndash;&#45;&#45;         TODO: 각 상황에 맞는 멘트 정하기&ndash;&gt;-->

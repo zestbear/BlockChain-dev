@@ -1,7 +1,7 @@
 //package com.automated.trading.stock.StockManager.util.mapper;
 //
 //import com.automated.trading.stock.StockManager.stock.contact.dto.ContactSendRequestDto;
-//import com.automated.trading.stock.StockManager.stock.contact.dto.ContactSetStateRequestDto;
+//import com.automated.trading.stock.StockManager.stock.contact.dto.ContactHoldRequestDto;
 //import com.automated.trading.stock.StockManager.stock.contact.dto.ReturnContactResponseDto;
 //import org.apache.ibatis.annotations.Mapper;
 //
@@ -12,7 +12,7 @@
 //
 //    void sendContact(ContactSendRequestDto dto);
 //
-//    void respondContact(ContactSetStateRequestDto dto);
+//    void respondContact(ContactHoldRequestDto dto);
 //
 //    List<ReturnContactResponseDto> findAllContacts();
 //
