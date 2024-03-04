@@ -1,19 +1,21 @@
 package com.automated.trading.stock.StockManager.community.contact.service;
 
 import com.automated.trading.stock.StockManager.community.contact.controller.dto.ContactSendRequestDto;
-import com.automated.trading.stock.StockManager.community.contact.controller.dto.ContactSetStateRequestDto;
+import com.automated.trading.stock.StockManager.community.contact.controller.dto.ContactHoldRequestDto;
 import com.automated.trading.stock.StockManager.community.contact.controller.dto.ReturnContactResponseDto;
 
 import java.util.List;
 
 public interface ContactService {
 
-    public void sendContact(ContactSendRequestDto dto);
+    void sendContact(ContactSendRequestDto dto);
 
-    public void respondContact(ContactSetStateRequestDto dto);
+    void respondContact(ContactHoldRequestDto dto);
 
-    public List<ReturnContactResponseDto> findAllContacts();
+    List<ReturnContactResponseDto> findAllContacts();
 
-    public ReturnContactResponseDto findById(int contact_id);
+    void setHold(int contact_id);
+
+    ReturnContactResponseDto findById(int contact_id);
 
 }

@@ -2,15 +2,10 @@ package com.automated.trading.stock.StockManager.community.contact.controller.dt
 
 import com.automated.trading.stock.StockManager.community.contact.domain.ContactResponseType;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-@Setter
-public class ContactSetStateRequestDto {
+public class ContactHoldRequestDto {
 
-    private ContactResponseType response_type;
-
-    private String response_title;
-    private String response_content;
+    private ContactResponseType type;
 
 }
