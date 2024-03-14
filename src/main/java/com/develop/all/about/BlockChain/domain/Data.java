@@ -1,0 +1,28 @@
+package com.develop.all.about.BlockChain.domain;
+
+import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Data {
+
+    @Setter
+    String hash;
+    @Setter
+    Wallet wallet;
+    List<Transaction> transaction_log;
+
+    public Data() {
+        this.transaction_log = new ArrayList<>();
+    }
+
+    public String transactionString() {
+        return transaction_log.toString();
+    }
+
+    public void addTransaction(Transaction transaction) {
+        this.transaction_log.add(transaction);
+    }
+
+}

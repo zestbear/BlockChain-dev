@@ -17,7 +17,7 @@
     </appender>
 
     <!-- Logger -->
-    <logger name="com.automated.trading.stock.StockManager" level="DEBUG" appender-ref="console" />
+    <logger name="com.develop.all.about.BlockChain" level="DEBUG" appender-ref="console" />
     <logger name="jdbc.sqlonly" level="INFO" appender-ref="console-infolog" />
     <logger name="jdbc.resultsettable" level="DEBUG" appender-ref="console-infolog" />
 
