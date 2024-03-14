@@ -4,7 +4,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.4'
 }
 
-group = 'com.automated.trading.stock'
+group = 'com.develop.all.about'
 version = '0.0.1-SNAPSHOT'
 
 java {
@@ -40,8 +40,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	runtimeOnly 'com.h2database:h2'
-//	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
-//	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3'
 	implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
 
 	// BlockChain key, hash 생성
@@ -51,10 +49,6 @@ dependencies {
 	// Spring batch
 //	implementation 'org.springframework.boot:spring-boot-starter-batch'
 //	testImplementation 'org.springframework.batch:spring-batch-test'
-
-	// kafka
-// 	implementation 'org.springframework.kafka:spring-kafka'
-//	testImplementation 'org.springframework.kafka:spring-kafka-test'
 
 	// Scheduling
 //	implementation 'org.springframework.boot:spring-boot-starter-quartz'
