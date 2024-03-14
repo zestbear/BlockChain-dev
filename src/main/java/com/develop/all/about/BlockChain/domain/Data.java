@@ -1,17 +1,19 @@
 package com.develop.all.about.BlockChain.domain;
 
+import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class Data {
 
     @Setter
-    String hash;
+    private String hash;
     @Setter
-    Wallet wallet;
-    List<Transaction> transaction_log;
+    private Wallet wallet;
+    private List<Transaction> transaction_log;
 
     public Data() {
         this.transaction_log = new ArrayList<>();
