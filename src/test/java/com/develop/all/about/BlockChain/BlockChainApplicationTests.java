@@ -1,4 +1,4 @@
-package com.automated.trading.stock.StockManager;
+package com.develop.all.about.BlockChain;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
