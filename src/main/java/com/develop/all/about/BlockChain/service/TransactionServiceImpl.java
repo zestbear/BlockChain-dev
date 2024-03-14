@@ -66,7 +66,10 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public void createWallet(int member_id, String[] keys) {
 
-        Wallet wallet = new Wallet(keys[0], keys[1], keys[2], new HashMap<>());
+        /**
+         * 타원 곡선 알고리즘에서 public key의 x, y 중에 y를 public key로 사용
+         */
+        Wallet wallet = new Wallet(keys[1], keys[2], new HashMap<>());
 
     }
 
