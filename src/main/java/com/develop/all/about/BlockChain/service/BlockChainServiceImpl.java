@@ -44,10 +44,9 @@ public class BlockChainServiceImpl implements BlockChainService {
 
     /**
      * 새로 생성되는 Block의 Hash 생성
-     * Synchronized 키워드로 비동기 설정 --> Single Thread? ConcurrentHashmap?
      */
     @Override
-    public synchronized String generateHash(GenerateHashDto generateHashDto) {
+    public String generateHash(GenerateHashDto generateHashDto) {
         try {
             String combinedData = generateHashDto.getPreviousHash() + generateHashDto.getData() + generateHashDto.getTimeStamp();
 
@@ -68,11 +67,12 @@ public class BlockChainServiceImpl implements BlockChainService {
     /**
      * 처음 추가하는 노드일 경우 이전 해시가 없다.
      * 처음 추가하는 노드일 경우 previous_hash를 ""인 공백으로 넣는다.
+     * Synchronized 키워드로 비동기 설정 --> Single Thread? ConcurrentHashmap?
 
      * Hash, Data를 함께 생성
      */
     @Override
-    public void createBlock(int member_id) {
+    public synchronized void createBlock(int member_id) {
 
         // 현재 시간
         LocalDateTime dateTime;
